@@ -1,19 +1,19 @@
 #pragma once
 
 #include "NGS/NGS.h"
-#include "opencv2/opencv.hpp"
 #include "OpticalDesign/DeviceConfig.h"
+#include "OpticalDesign/Linux/NSLConfig.h"
 
 namespace devices {
 
 	struct _CameraData {
-		cv::VideoCapture capture;
+		nsl::DeviceFile driver{"/dev/video1"};
 	};
 	inline bool Camera::Open() {
 		_data = ngs::New(new _CameraData());
 		auto& data = *(_CameraData*)_data;
 
-		data.capture.open(1);
+		data.driver.Open();
 
 		if (!data.capture.isOpened()) {
 			ngs::nos.Error("camera initialize failed\n");
