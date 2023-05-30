@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="模块">
+      <UniqueIdentifier>{3773e10a-6297-4339-a6d9-2202f4b590a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\bus">
+      <UniqueIdentifier>{03b9ba7c-1086-4fe2-968f-9678adf9a7d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\gpio">
+      <UniqueIdentifier>{9cc79523-457a-491d-96bf-c72e32c2b894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\devices">
+      <UniqueIdentifier>{765f17f7-f432-4797-a26f-258aa27e60b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\slave">
+      <UniqueIdentifier>{aca6f7af-6652-4003-916f-bbc792110252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\esp32">
+      <UniqueIdentifier>{f174839f-97fe-478f-be08-50958c3bbd80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PWM.cpp">
+      <Filter>源文件\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\SPI.cpp">
+      <Filter>源文件\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\GPIO.cpp">
+      <Filter>源文件\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\IIC.cpp">
+      <Filter>源文件\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SPI.h">
+      <Filter>头文件\bus</Filter>
+    </ClInclude>
+    <ClInclude Include="BusConcept.h">
+      <Filter>头文件\bus</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IIC.h">
+      <Filter>头文件\bus</Filter>
+    </ClInclude>
+    <ClInclude Include="GPIO.h">
+      <Filter>头文件\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor.h">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="PWM.h">
+      <Filter>头文件\bus</Filter>
+    </ClInclude>
+    <ClInclude Include="Gyroscope.h">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Slave.h">
+      <Filter>头文件\slave</Filter>
+    </ClInclude>
+    <ClInclude Include="Register.h">
+      <Filter>头文件\slave</Filter>
+    </ClInclude>
+    <ClInclude Include="esp32_idf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ESP32.h">
+      <Filter>头文件\slave</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

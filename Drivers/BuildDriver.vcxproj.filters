@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{70ade9fa-ac85-4cc7-a6b4-9159d66d7cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{f6e0e80e-f9b4-4814-8daf-86cf22791d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\esp32">
+      <UniqueIdentifier>{ed390a17-9a8f-4405-a441-ac9499558626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ov5640">
+      <UniqueIdentifier>{af4b9a1a-c192-4a11-948b-06c3f5a21dee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ESP32\esp32App.c">
+      <Filter>source\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="ESP32\esp32.c">
+      <Filter>source\esp32</Filter>
+    </ClCompile>
+    <ClCompile Include="OV5640\mx6s_capture.c">
+      <Filter>source\ov5640</Filter>
+    </ClCompile>
+    <ClCompile Include="OV5640\mxc_mipi_csi.c">
+      <Filter>source\ov5640</Filter>
+    </ClCompile>
+    <ClCompile Include="OV5640\mxc_vadc.c">
+      <Filter>source\ov5640</Filter>
+    </ClCompile>
+    <ClCompile Include="OV5640\ov5640.c">
+      <Filter>source\ov5640</Filter>
+    </ClCompile>
+    <ClCompile Include="OV5640\ov5640_mipi.c">
+      <Filter>source\ov5640</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ESP32\Register.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="OV5640\mxc_vadc.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ESP32\Makefile">
+      <Filter>source\esp32</Filter>
+    </None>
+    <None Include="OV5640\Makefile">
+      <Filter>source\ov5640</Filter>
+    </None>
+  </ItemGroup>
+</Project>

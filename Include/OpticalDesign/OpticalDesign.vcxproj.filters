@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="模块">
+      <UniqueIdentifier>{3773e10a-6297-4339-a6d9-2202f4b590a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\data">
+      <UniqueIdentifier>{c70433a5-5e1f-48ae-a537-4f94ce6b7abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\carman">
+      <UniqueIdentifier>{ad107e02-d3c3-43e4-a32c-cef7a3c44da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ctrl">
+      <UniqueIdentifier>{63c5238a-b9fa-4e51-96a1-6ba8b5fc6b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\device">
+      <UniqueIdentifier>{7edcb614-3801-4190-81bd-3dba83e42b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\utils">
+      <UniqueIdentifier>{8444e2e8-b369-4942-aa43-3bf3554a43b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\device\linux">
+      <UniqueIdentifier>{1bc0b829-22ce-463f-8f03-69461af3b8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\device\windows">
+      <UniqueIdentifier>{dade585a-e675-4efb-88c6-6b79397503fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Maze.h">
+      <Filter>头文件\data</Filter>
+    </ClInclude>
+    <ClInclude Include="Converter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>头文件\data</Filter>
+    </ClInclude>
+    <ClInclude Include="Eyes.h">
+      <Filter>头文件\carman</Filter>
+    </ClInclude>
+    <ClInclude Include="Brain.h">
+      <Filter>头文件\carman</Filter>
+    </ClInclude>
+    <ClInclude Include="Cerebellum.h">
+      <Filter>头文件\carman</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveLogic.h">
+      <Filter>头文件\ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Foot.h">
+      <Filter>头文件\carman</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices.h">
+      <Filter>头文件\device</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceConfig.h">
+      <Filter>头文件\device</Filter>
+    </ClInclude>
+    <ClInclude Include="Win\Camera.h">
+      <Filter>头文件\device\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Win\Gyroscope.h">
+      <Filter>头文件\device\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Camera.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Gyroscope.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Esp32.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Engine.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="Win\Engine.h">
+      <Filter>头文件\device\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\NSLConfig.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="CVUtil.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceAPI.h">
+      <Filter>头文件\device</Filter>
+    </ClInclude>
+    <ClInclude Include="LinuxDevice.h">
+      <Filter>头文件\device</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsDevice.h">
+      <Filter>头文件\device</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Key.h">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+#pragma once
+
+#include "NGS/NGS.h"
+#include "ESP32/Defined.h"
+#include "ESP32/Config.h"
+#include "ESP32/Register.h"
+
+OPT_BEGIN
+
+constexpr ngs::pin_t
+SLAVE_ADDRESS = EOD_ADDRESS,
+SLAVE_SDA = 4,
+SLAVE_SCLK = 5,
+
+LED_TEST = 6,
+
+MOTOR_FL_GPIO0 = 35,
+MOTOR_FL_GPIO1 = 36,
+MOTOR_FL_PWM = 37,
+
+MOTOR_FR_GPIO0 = 38,
+MOTOR_FR_GPIO1 = 39,
+MOTOR_FR_PWM = 40,
+
+MOTOR_BL_GPIO0 = 16,
+MOTOR_BL_GPIO1 = 17,
+MOTOR_BL_PWM = 18,
+
+MOTOR_BR_GPIO0 = 9,
+MOTOR_BR_GPIO1 = 10,
+MOTOR_BR_PWM = 11,
+
+GYRO_SDA = 7,
+GYRO_SCLK = 15
+;
+
+OPT_END

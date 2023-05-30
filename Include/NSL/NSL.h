@@ -1,0 +1,23 @@
+#pragma once
+
+#include "NGS/NGS.h"
+
+#if NGS_PLATFORM != NGS_LINUX
+#error "This system is not Linux. This library can only be run on Linux."
+#endif
+
+#include "NSL/Config.h"
+
+#include "NSL/file/File.h"
+#include "NSL/file/DeviceFile.h"
+
+
+#ifdef NSL_USE_HEADER_IMPL
+
+#include "NSL/LinuxHeader.h"
+
+#include "NSL/file/File.hpp"
+#include "NSL/io/GPIO.h"
+#include "NSL/io/MultiplexIO.hpp"
+
+#endif

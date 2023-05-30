@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "G:\\Projects\\C_CPP\\VisualStudio\\OpticalDesign\\Temp\\Compile\\x64\\Debug\\Com.obj",
+            "outputs": [
+                "G:\\Projects\\C_CPP\\VisualStudio\\OpticalDesign\\Temp\\Compile\\x64\\Debug\\vc143.pdb",
+                "G:\\Projects\\C_CPP\\VisualStudio\\OpticalDesign\\Temp\\Compile\\x64\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

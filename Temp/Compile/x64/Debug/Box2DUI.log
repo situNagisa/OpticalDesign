@@ -1,0 +1,105 @@
+﻿D:\Application\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(G:\Projects\C_CPP\VisualStudio\OpticalDesign\Temp\Compile\x64\Debug\)包含从另一个项目(GyroscopeSDK.vcxproj, OpticalDesign.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_TypeTrait.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Object.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(33,40): warning C4244: “初始化”: 从“ngs::type::uint64”转换到“const unsigned char”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(109,76): warning C4309: “初始化”: 截断常量值
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(173,58): warning C4267: “参数”: 从“size_t”转换到“ngs::type::uint16”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(217,12): warning C4244: “初始化”: 从“ngs::type::float64”转换到“ngs::type::float32”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(218,12): warning C4244: “初始化”: 从“ngs::type::float64”转换到“ngs::type::float32”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(219,12): warning C4244: “初始化”: 从“ngs::type::float64”转换到“ngs::type::float32”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(236,17): warning C4244: “=”: 从“ngs::type::float32”转换到“ngs::type::byte”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(238,11): warning C4244: “=”: 从“ngs::type::float32”转换到“ngs::type::byte”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(240,11): warning C4244: “=”: 从“ngs::type::float32”转换到“ngs::type::byte”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(278,40): warning C4244: “参数”: 从“ngs::type::float32”转换到“unsigned char”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(279,40): warning C4244: “参数”: 从“ngs::type::float32”转换到“unsigned char”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Color.h(280,40): warning C4244: “参数”: 从“ngs::type::float32”转换到“unsigned char”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\File.h(35,44): warning C4455: “operator ""sv”: 已保留不以下划线开头的文本后缀标识符
+D:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: “APIENTRY”: 宏重定义
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Debug\Stream.h(323,1): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Math\Math.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Math\Matrix.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Math\Vector.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\opencv2\objdetect\aruco_board.hpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(261,17): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(261,10): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(266,36): warning C4244: “参数”: 从“size_t”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(266,33): warning C4244: “参数”: 从“size_t”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(286,31): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(286,24): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(295,29): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(295,22): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(304,27): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(304,20): warning C4244: “参数”: 从“const float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(431,42): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(431,35): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(433,28): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Maze.h(433,21): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\GyroscopeSDK\Com.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Win\Gyroscope.h(28,17): warning C4101: “tryTimes”: 未引用的局部变量
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Win\Gyroscope.h(100,44): warning C4244: “参数”: 从“float”转换到“ngs::type::int32”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Win\Gyroscope.h(104,44): warning C4244: “参数”: 从“float”转换到“ngs::type::int32”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Win\Gyroscope.h(108,44): warning C4244: “参数”: 从“float”转换到“ngs::type::int32”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(206,39): warning C4244: “=”: 从“double”转换到“_Tp”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(300,77): warning C4305: “参数”: 从“const double”到“T”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(300,55): warning C4305: “参数”: 从“const double”到“T”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(308,43): warning C4305: “初始化”: 从“double”到“const float”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(637,32): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(651,41): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(163,20): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(162,20): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(161,20): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(160,18): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(178,45): warning C4267: “参数”: 从“size_t”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(178,36): warning C4244: “参数”: 从“float”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(178,30): warning C4244: “=”: 从“T”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(179,45): warning C4267: “参数”: 从“size_t”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(179,36): warning C4244: “参数”: 从“float”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(179,30): warning C4244: “=”: 从“T”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(180,41): warning C4267: “参数”: 从“size_t”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(180,32): warning C4244: “参数”: 从“float”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(180,28): warning C4244: “=”: 从“T”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(181,41): warning C4267: “参数”: 从“size_t”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(181,32): warning C4244: “参数”: 从“float”转换到“T”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(181,28): warning C4244: “=”: 从“T”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(220,21): warning C4244: “初始化”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(223,11): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(222,33): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(226,18): warning C4244: “初始化”: 从“double”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(228,45): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(237,17): warning C4244: “初始化”: 从“double”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(239,44): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(257,21): warning C4244: “初始化”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(260,36): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(259,9): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(263,18): warning C4244: “初始化”: 从“double”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(265,45): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(274,17): warning C4244: “初始化”: 从“double”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(276,44): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(330,26): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(330,17): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(331,22): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Eyes.h(331,15): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Foot.h(51,13): warning C4244: “初始化”: 从“ngs::type::float64”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Foot.h(54,15): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Foot.h(56,1): warning C4305: “-=”: 从“double”到“float”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Foot.h(58,1): warning C4305: “+=”: 从“double”到“float”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(77,37): warning C4566: 由通用字符名称“\U0001F9E0”表示的字符不能在当前代码页(936)中表示出来
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(83,38): warning C4566: 由通用字符名称“\U0001F9E0”表示的字符不能在当前代码页(936)中表示出来
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(93,25): warning C4244: “初始化”: 从“_Rep”转换到“ngs::type::float64”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(97,16): warning C4244: “参数”: 从“ngs::type::float64”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(141,55): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(166,56): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\Brain.h(166,47): warning C4244: “参数”: 从“float”转换到“size_t”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Math\Vector.h(172,42): warning C4244: “参数”: 从“size_t”转换到“float”，可能丢失数据
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(486,76): warning C4305: “参数”: 从“const double”到“T”截断
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Include\OpticalDesign\CVUtil.h(486,54): warning C4305: “参数”: 从“const double”到“T”截断
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Communication.h(63,47): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\NGS_Communication.h(67,27): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+G:\Projects\C_CPP\Clion\NGS\include\NGS\Math\Vector.h(202,72): warning C4244: “参数”: 从“size_t”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(251,71): warning C4244: “参数”: 从“ngs::type::size_t”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xmemory(677,68): warning C4244: “参数”: 从“ngs::type::size_t”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(251,71): warning C4244: “参数”: 从“_Ty”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xmemory(677,68): warning C4244: “参数”: 从“_Ty”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(252,85): warning C4244: “参数”: 从“ngs::type::size_t”转换到“float”，可能丢失数据
+D:\Application\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(252,85): warning C4244: “参数”: 从“_Ty”转换到“float”，可能丢失数据

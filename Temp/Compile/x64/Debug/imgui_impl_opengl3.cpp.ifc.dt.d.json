@@ -1,0 +1,37 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\box2dui\\imgui_impl_opengl3.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\imgui\\imgui.h",
+            "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\imgui\\imconfig.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\float.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\vcruntime.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\sal.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\concurrencysal.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\vadefs.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\stdarg.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\stddef.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\string.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_memory.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_memcpy_s.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\errno.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\vcruntime_string.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_wstring.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\assert.h",
+            "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\box2dui\\imgui_impl_opengl3.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\stdio.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_wstdio.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_stdio_config.h",
+            "d:\\application\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.36.32532\\include\\stdint.h",
+            "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\glad\\gl.h",
+            "d:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\shared\\winapifamily.h",
+            "d:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\shared\\winpackagefamily.h",
+            "g:\\projects\\c_cpp\\visualstudio\\opticaldesign\\include\\khr\\khrplatform.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
