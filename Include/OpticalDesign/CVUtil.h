@@ -567,63 +567,144 @@ public:
 
 		return result;
 	}
-
 	static Treasure RecognizeTreasure(
-		const cv::Mat& source,
+		cv::Mat& source,
 		const ColorRange& CardRange,
 		const ColorRange& PatternRange
 	) {
-		
-		auto Card = _RecognizeCardColor(source, CardRange);
-		auto Pattern = _RecognizePatternColor(source, PatternRange);
-		_RecognizeTreasureFrom(Pattern, PatternRange);
+		cv::resize(source, source, { IMAGE_SIZE.x,IMAGE_SIZE.y });
 
-		cv::imshow("", Card);
-		cv::waitKey();
+		/*cv::imshow("", source);
+		cv::waitKey();*/
 
-		cv::imshow("", Pattern);
-		cv::waitKey();
+		auto bounds = _RecognizeCardColor(source, CardRange);
+		if (bounds.size() == 0) {
+			ngs::nos.Warning("未找到指定的颜色范围内的轮廓\n");
+			return { {},{},Treasure::Form::unknown };
+		}
+		auto form = _RecognizePattern(source, PatternRange, bounds[0]);
+		Treasure treasure = {};
+		treasure.card = ngs_cv::Convert(CardRange.GetColor());
+		treasure.pattern = ngs_cv::Convert(PatternRange.GetColor());
+		treasure.form = form;
+		return treasure;
+	}
+
+public:
+	static std::vector<Rect> _RecognizeCardColor(
+		cv::Mat& source,
+		const ColorRange& CardRange
+	) {
+		constexpr Point min_rate = { 0.05,0.05 };
+		constexpr Point max_rate = { 0.6,0.6 };
+
+		cv::Mat hsv;
+		cv::cvtColor(source, hsv, cv::COLOR_BGR2HSV);
+		cv::Mat mask = CardRange.GetMask(hsv);
+		cv::Mat filter;
+		cv::morphologyEx(mask, filter, cv::MorphTypes::MORPH_CLOSE, cv::getStructuringElement(cv::MorphShapes::MORPH_RECT, { 5,5 }), { -1,-1 }, 1);
 
 		std::vector<std::vector<cv::Point>> CardContours;
-		std::vector<cv::Vec4i> hierarchy1;
-		cv::findContours(Card, CardContours, hierarchy1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		double CardArea = 0;
-		for (const auto& CardContour : CardContours) {
-			CardArea += cv::contourArea(CardContour);
-		}
-
-		std::vector<std::vector<cv::Point>> PatternContours;
-		std::vector<cv::Vec4i> hierarchy2;
-		cv::findContours(Pattern, PatternContours, hierarchy2, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		double PatternArea = 0;
-		for (const auto& PatternContour : PatternContours) {
-			PatternArea += cv::contourArea(PatternContour);
-		}
-
-		double percentage = CardArea / PatternArea;
-		if ((percentage >= 2) && (percentage <= 6)) {
-			ngs::nos.Log("CVUtil::_RecognizeTreasureFrom", "成功识别宝藏\n");
-			return {};
-		}
-		
-	}
-public:
-
-	static Treasure::Form _RecognizeTreasureFrom(
-		const cv::Mat& source,
-		const ColorRange& range
-	) {
-
-		std::vector<std::vector<cv::Point>> contours;
 		std::vector<cv::Vec4i> hierarchy;
-		cv::findContours(source, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+		cv::findContours(filter, CardContours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
-		if (contours.empty())
+		std::vector<Rect> bounds;
+		for (const auto& CardContour : CardContours) {
+			auto bound = ngs_cv::Convert(cv::boundingRect(CardContour));
+			if (!ngs::In(bound.width, IMAGE_SIZE.x * min_rate.x, IMAGE_SIZE.x * max_rate.x))continue;
+			if (!ngs::In(bound.height, IMAGE_SIZE.y * min_rate.y, IMAGE_SIZE.y * max_rate.y))continue;
+			cv::rectangle(source, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
+			if (!ngs::In<float>(bound.WH_Ratio(), 0.1, 10))continue;
+
+			double CardArea = cv::contourArea(CardContour);
+			if (!ngs::In(bound.Area() / CardArea, 0.8, 1.2))continue;
+			bounds.push_back(bound);
+		}
+		ngs::nos.Log("CVUtil::_RecognizeCardColor", "检测到卡片%d个\n", bounds.size());
+		std::ranges::sort(bounds, [](const Rect& a, const Rect& b) {
+			return a < b;
+			});
+		return bounds;
+	}
+
+	static Treasure::Form _RecognizePattern(
+		const cv::Mat& source,
+		const ColorRange& PatternRange,
+		const Rect& bound
+	) {
+		constexpr Point min_rate = { 0.6,0.3 };
+		constexpr Point max_rate = { 0.95,0.7 };
+
+		cv::Mat hsv;
+		source(ngs_cv::Convert(bound)).copyTo(hsv);
+		cv::cvtColor(hsv, hsv, cv::COLOR_BGR2HSV);
+		Point image_size = { 200,200 };
+		cv::resize(hsv, hsv, {}, image_size.x / hsv.cols, image_size.y / hsv.cols);
+		image_size.Set((float)hsv.cols, (float)hsv.rows);
+
+		cv::Mat mask = PatternRange.GetMask(hsv);
+		cv::Mat filter;
+		cv::morphologyEx(mask, filter, cv::MorphTypes::MORPH_OPEN, cv::getStructuringElement(cv::MorphShapes::MORPH_RECT, { 5,5 }), { -1,-1 }, 1);
+
+
+		cv::imshow("", filter);
+		cv::waitKey();
+		std::vector<std::vector<cv::Point>> PatternContours;
+		std::vector<cv::Vec4i> hierarchy;
+		cv::findContours(filter, PatternContours, hierarchy, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
+		cv::cvtColor(hsv, hsv, cv::COLOR_HSV2BGR);
+		std::vector<std::vector<cv::Point>> validContours;
+		std::vector<Rect> bounds;
+
+
+		for (size_t i = 0; i < PatternContours.size(); i++) {
+			const auto& PatternContour = PatternContours[i];
+			cv::drawContours(hsv, PatternContours, i, { 0x00,0xFF,0x00 }, 2);
+
+			auto bound = ngs_cv::Convert(cv::boundingRect(PatternContour));
+			if (!ngs::In(bound.width, image_size.x * min_rate.x, image_size.x * max_rate.x))continue;
+			if (!ngs::In(bound.height, image_size.y * min_rate.y, image_size.y * max_rate.y))continue;
+			//cv::rectangle(source, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
+			if (!ngs::In<float>(bound.WH_Ratio(), 0.5, 2))continue;
+			//cv::rectangle(hsv, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
+
+			cv::imshow("", hsv);
+			cv::waitKey();
+			double PatternArea = cv::contourArea(PatternContour);
+			if (!ngs::In<float>(bound.Area() / PatternArea, 0.8 * 0.8, 1.5 * 1.5))continue;
+
+			validContours.push_back(PatternContour);
+		}
+
+		ngs::nos.Log("CVUtil::_RecognizePattern", "检测到形状%d个\n", validContours.size());
+
+		if (validContours.empty())
 		{
-			ngs::nos.Log("CVUtil::_RecognizeTreasureFrom", "未找到指定的颜色范围内的轮廓\n");
+			ngs::nos.Log("CVUtil::_RecognizePattern", "未找到指定的颜色范围内的轮廓\n");
 			return Treasure::Form::unknown;
 		}
 
+		for (size_t i = 0; i < validContours.size(); i++)
+		{
+			size_t count = 0;
+			Treasure::Form form = Treasure::Form::unknown;
+
+			if (_IsCircle(validContours)) {
+				form = Treasure::Form::circle;
+				count++;
+			}
+			if (_IsTriangle(validContours)) {
+				form = Treasure::Form::triangle;
+				count++;
+			}
+			if (count != 1)continue;
+			return form;
+		}
+		return Treasure::Form::unknown;
+
+	}
+
+	static bool _IsCircle(const std::vector<std::vector<cv::Point>>& contours) {
 		for (size_t i = 0; i < contours.size(); i++)
 		{
 			cv::Point2f center;
@@ -632,55 +713,32 @@ public:
 			double area = cv::contourArea(contours[i]);
 			double perimeter = cv::arcLength(contours[i], true);
 			double circularity = 4 * CV_PI * area / (perimeter * perimeter);
-			if (circularity > 0.8) {
-				ngs::nos.Log("CVUtil::_RecognizeTreasureFrom", "这是一个圆形\n");
-				cv::circle(source, center, radius, cv::Scalar(0, 0, 255), 2);
-				cv::imshow("", source);
-				cv::waitKey();
-				return Treasure::Form::circle;
-			}
-			else {
-				//多边形拟合
-				std::vector<cv::Point> polygon;
-				polygon.reserve(20);
-				cv::approxPolyDP(contours[i], polygon, 10, true);
 
-				if (ngs::In<size_t>(polygon.size(),3,5))
-				{
-					ngs::nos.Log("CVUtil::_RecognizeTreasureFrom", "这是一个三角形\n");
-					cv::drawContours(source, contours, i, { 0xFF,0,0 }, 1);
-					cv::imshow("", source);
-					cv::waitKey();
-				}
-				return Treasure::Form::triangle;
+			if (circularity > 0.7) {
+				ngs::nos.Log("CVUtil::_IsCircle", "这是一个圆形\n");
+				return true;
 			}
+			return false;
 		}
-		return Treasure::Form::unknown;
+		return false;
+	}
+	static bool _IsTriangle(const std::vector<std::vector<cv::Point>>& contours) {
+		for (size_t i = 0; i < contours.size(); i++)
+		{
+			std::vector<cv::Point> polygon;
+			polygon.reserve(20);
+			cv::approxPolyDP(contours[i], polygon, 10, true);
+
+			if (ngs::In<size_t>(polygon.size(), 3, 5))
+			{
+				ngs::nos.Log("CVUtil::_IsTriangle", "这是一个三角形\n");
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
-	static cv::Mat _RecognizePatternColor(
-		const cv::Mat& source,
-		const ColorRange& PatternRange
-	) {
-		cv::Mat hsv;
-		cv::cvtColor(source, hsv, cv::COLOR_BGR2HSV);
-		cv::Mat mask = PatternRange.GetMask(hsv);
-		cv::Mat filter;
-		cv::morphologyEx(mask, filter, cv::MorphTypes::MORPH_OPEN, cv::getStructuringElement(cv::MorphShapes::MORPH_RECT, { 5,5 }), { -1,-1 }, 1);
-		return filter;
-	}
-
-	static cv::Mat _RecognizeCardColor(
-		const cv::Mat& source,
-		const ColorRange& CardRange
-	) {
-		cv::Mat hsv;
-		cv::cvtColor(source, hsv, cv::COLOR_BGR2HSV);
-		cv::Mat mask = CardRange.GetMask(hsv);
-		cv::Mat filter;
-		cv::morphologyEx(mask, filter, cv::MorphTypes::MORPH_OPEN, cv::getStructuringElement(cv::MorphShapes::MORPH_RECT, { 5,5 }), { -1,-1 }, 1);
-		return filter;
-	}
 
 };
 

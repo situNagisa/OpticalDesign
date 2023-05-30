@@ -16,6 +16,27 @@ void RunBrain() {
 	}
 	ngs::Allocator::I().Show();
 }
+void TEST_RecognizeTreasure() {
+	cv::Mat source;
+	cv::VideoCapture capture;
+	capture.open(0);
+	capture >> source;
+
+	//cv::Mat source = cv::imread("D:\\work\\photo\\微信图片_20230529225721.jpg");
+
+	while (optical_design::CVUtil::RecognizeTreasure(
+		source,
+		optical_design::color_defined::blue,
+		optical_design::color_defined::yellow
+	).form == optical_design::Treasure::Form::unknown) {
+		capture >> source;
+		cv::imshow("", source);
+		cv::waitKey(30);
+	}
+
+}
+
+
 #if NGS_PLATFORM == NGS_LINUX
 #include "NGS/Embedded/Embedded.h"
 
