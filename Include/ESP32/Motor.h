@@ -2,6 +2,8 @@
 
 #include "ESP32/Config.h"
 #include "ESP32/PWM.h"
+#include "ESP32/PCNT.h"
+#include "ESP32/Setting.h"
 
 OPT_BEGIN
 
@@ -15,15 +17,18 @@ struct _Wheel {
 		if (!_gpio0.IsOpened() && !_gpio0.Open(gpio0, ngs::GPIO::Mode::output))return false;
 		if (!_gpio1.IsOpened() && !_gpio1.Open(gpio1, ngs::GPIO::Mode::output))return false;
 		if (!_pwm.IsOpened() && !_pwm.Open(pwm))return false;
-		if (!_impulse0.IsOpened() && !_impulse0.Open(impulse0, ngs::GPIO::Mode::input))return false;
-		if (!_impulse1.IsOpened() && !_impulse1.Open(impulse1, ngs::GPIO::Mode::input))return false;
+		if (!_pcnt.IsOpened() && !_pcnt.Open(impulse0, impulse1, 100, 0))return false;
 
 		_is_opened = true;
 		ngs::nos.Log("_Wheel::Open", "gpio0:%d, gpio1:%d pwm:%d success!\n", gpio0, gpio1, pwm);
+
+		_pid.SetPID(PID.x, PID.y, PID.z);
 		return true;
 	}
 	void Update() {
-
+		_UpdatePCNT();
+		_aim_percent += _pid.GetOutput(_current_velocity, _aim_percent);
+		_pwm.Set(_aim_percent);
 	}
 
 	bool IsOpened()const { return _is_opened; }
@@ -31,6 +36,7 @@ struct _Wheel {
 		_gpio0.Close();
 		_gpio1.Close();
 		_pwm.Close();
+		_pcnt.Close();
 		_is_opened = false;
 	}
 	void SetDirect(int direct) {
@@ -44,16 +50,33 @@ struct _Wheel {
 		}
 	}
 	void SetVelocityPercent(float percent) {
-		_pwm.Set(percent);
+		_aim_percent = percent;
 	}
 	float GetLinearVelocity() {
-
+		return _current_velocity;
 	}
 private:
+	void _UpdatePCNT() {
+		auto count = _pcnt.GetPulseCount();
+		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(_end - _now);
+
+		//_current_velocity;
+
+		_end = _now;
+		_now = std::chrono::high_resolution_clock::now();
+		_pcnt.ClearPulseCount();
+	}
+private:
+	std::chrono::high_resolution_clock::time_point _now = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point _end = std::chrono::high_resolution_clock::now();
+
 	bool _is_opened = false;
 	ngs::GPIO _gpio0, _gpio1;
-	ngs::GPIO _impulse0, _impulse1;
+	PCNT _pcnt;
+	ngs::PID _pid;
 	PWM _pwm;
+	float _aim_percent = 0.0f;
+	float _current_velocity = 0.0f;
 };
 
 class Motor {
@@ -67,14 +90,12 @@ public:
 public:
 
 	bool Open(
-		ngs::pin_t fl_gpio0, ngs::pin_t fl_gpio1, ngs::pin_t fl_pwm,
-		ngs::pin_t bl_gpio0, ngs::pin_t bl_gpio1, ngs::pin_t bl_pwm,
-		ngs::pin_t fr_gpio0, ngs::pin_t fr_gpio1, ngs::pin_t fr_pwm,
-		ngs::pin_t br_gpio0, ngs::pin_t br_gpio1, ngs::pin_t br_pwm
+		ngs::pin_t l_gpio0, ngs::pin_t l_gpio1, ngs::pin_t l_impulse0, ngs::pin_t l_impulse1, ngs::pin_t l_pwm,
+		ngs::pin_t r_gpio0, ngs::pin_t r_gpio1, ngs::pin_t r_impulse0, ngs::pin_t r_impulse1, ngs::pin_t r_pwm
 	) {
 		ngs::nos.Log("Motor::Open", "open motor\n");
-		if (!_Left().IsOpened() && !_Left().Open(fl_gpio0, fl_gpio1, fl_pwm))return false;
-		if (!_Right().IsOpened() && !_Right().Open(bl_gpio0, bl_gpio1, bl_pwm))return false;
+		if (!_Left().IsOpened() && !_Left().Open(l_gpio0, l_gpio1, l_impulse0, l_impulse1, l_pwm))return false;
+		if (!_Right().IsOpened() && !_Right().Open(r_gpio0, r_gpio1, r_impulse0, r_impulse1, r_pwm))return false;
 		_is_opened = true;
 		ngs::nos.Log("Motor::Open", "success!\n");
 		return true;

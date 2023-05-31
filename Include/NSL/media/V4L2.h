@@ -41,6 +41,14 @@ public:
 	bool SetFrameRate(ngs::byte frameRate);
 
 	bool Read(ngs::void_ptr data);
+	std::pair<ngs::byte_ptr, size_t> Read() {
+		std::pair<ngs::byte_ptr, size_t> pair = {};
+		auto& [data, size] = pair;
+		size = GetFrameBufferSize();
+		data = ngs::New(new ngs::byte[size](), size);
+		Read(data);
+		return pair;
+	}
 
 	const ngs::Point2s& GetSize()const;
 	size_t GetFrameBufferSize()const;

@@ -22,7 +22,7 @@ namespace devices {
 
 		bool IsOpened()const;
 
-		std::vector<ngs::byte> Get();
+		const std::vector<ngs::byte>& Get();
 	private:
 		ngs::void_ptr _data;
 

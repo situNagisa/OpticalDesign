@@ -24,6 +24,10 @@ namespace ngs_cv {
 	inline Point Convert(const cv::Point& point) {
 		return { (float)point.x,(float)point.y };
 	}
+
+	inline ngs::HSV Convert(const std::array<int, 3>& hsv) {
+		return { (ngs::byte)hsv[0],hsv[1] / (float)0xFF,hsv[2] / (float)0xFF };
+	}
 }
 
 namespace ngs_b2 {

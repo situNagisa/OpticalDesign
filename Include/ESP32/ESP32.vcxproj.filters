@@ -51,7 +51,7 @@
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\GPIO.cpp">
       <Filter>头文件\io</Filter>
     </ClCompile>
-    <ClCompile Include="PCNT.cpp">
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PCNT.cpp">
       <Filter>源文件\esp32</Filter>
     </ClCompile>
   </ItemGroup>

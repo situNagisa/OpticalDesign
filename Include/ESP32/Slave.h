@@ -4,7 +4,6 @@
 #include "ESP32/Motor.h"
 #include "ESP32/Setting.h"
 #include "ESP32/ESP32.h"
-#include "ESP32/GPIO.h"
 
 OPT_BEGIN
 
@@ -21,10 +20,8 @@ public:
 		if (!_gpio.IsOpened() && !_gpio.Open(LED_TEST))return false;
 		//_gpio.High();
 		if (!_motor.IsOpened() && !_motor.Open(
-			MOTOR_FL_GPIO0, MOTOR_FL_GPIO1, MOTOR_FL_PWM,
-			MOTOR_BL_GPIO0, MOTOR_BL_GPIO1, MOTOR_BL_PWM,
-			MOTOR_FR_GPIO0, MOTOR_FR_GPIO1, MOTOR_FR_PWM,
-			MOTOR_BR_GPIO0, MOTOR_BR_GPIO1, MOTOR_BR_PWM
+			MOTOR_L_GPIO0, MOTOR_L_GPIO1, MOTOR_L_IMPULSE0, MOTOR_L_IMPULSE1, MOTOR_L_PWM,
+			MOTOR_R_GPIO0, MOTOR_R_GPIO1, MOTOR_R_IMPULSE0, MOTOR_R_IMPULSE1, MOTOR_R_PWM
 		))return false;
 		if (!_gyro.IsOpened() && !_gyro.Open(GYRO_SDA, GYRO_SCLK))return false;
 		if (!_iic.IsOpened() && !_iic.Open(SLAVE_SDA, SLAVE_SCLK, SLAVE_ADDRESS))return false;
@@ -124,7 +121,7 @@ private:
 	}
 private:
 	bool _is_opened;
-	GPIO _gpio;
+	ngs::GPIO _gpio;
 	IICSlave _iic;
 	Gyroscope _gyro;
 	Motor _motor;

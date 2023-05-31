@@ -21,10 +21,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\GPIO.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\IIC.cpp" />
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PCNT.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PWM.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\SPI.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\main.cpp" />
-    <ClCompile Include="PCNT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BusConcept.h" />

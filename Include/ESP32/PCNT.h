@@ -20,6 +20,7 @@ public:
 	void SetGlitchFilter(ngs::uint32 max_glitch_ns);
 
 	int GetPulseCount()const;
+	void ClearPulseCount();
 
 	void Enable();
 	void Disable();
