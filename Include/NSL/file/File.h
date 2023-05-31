@@ -3,10 +3,11 @@
 #include "NSL/LinuxHeader.h"
 #include "NSL/Config.h"
 #include "NSL/io/MultiplexIO.h"
+#include "NSL/Defined.h"
 
 NSL_BEGIN
 
-class File : public ngs::DeleteCopy {
+class File : public ngs::DeleteCopy, public NSLObject {
 	NGS_TYPE_DEFINE(ngs::FilePath, path);
 public:
 	struct AccessMode {
@@ -108,6 +109,20 @@ public:
 	}
 	int Write(ngs::byte_ptr_cst data, size_t size);
 	int Read(ngs::byte_ptr data, size_t size);
+
+	template<typename... Args>
+	int IOCtrlCode(ngs::uint32 request, Args&&... args) {
+		//extern int ::ioctl(int, unsigned long int, ...);
+		int result = ioctl(_fd, request, std::forward<Args>(args)...);
+		return result;
+	}
+	template<typename... Args>
+	bool IOCtrl(ngs::uint32 request, Args&&... args) {
+		return IOCtrlCode(request, std::forward<Args>(args)...) >= 0;
+	}
+
+	ngs::void_ptr MemoryMap(size_t length, int port, int flag, std::ptrdiff_t offset) { return MemoryMap(nullptr, length, port, flag, offset); }
+	ngs::void_ptr MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset);
 private:
 
 private:

@@ -7,10 +7,10 @@
     <LINUX_KERNEL_ARM>$(LINUX_KERNEL_ARCH)arm\include</LINUX_KERNEL_ARM>
     <LINUX_KERNEL_INCLUDE>$(LINUX_KERNEL)include\;$(LINUX_KERNEL_ARM);</LINUX_KERNEL_INCLUDE>
     <CROSS_COMPILER_DIR>D:\Application\Complier\gcc-arm-10.3-2021.07-mingw-w64-i686-arm-none-linux-gnueabihf\</CROSS_COMPILER_DIR>
-    <CROSS_COMPILER_INCLUDE>$(CROSS_COMPIER)lib\gcc\arm-none-linux-gnueabihf\10.3.1\include</CROSS_COMPILER_INCLUDE>
+    <CROSS_COMPILER_INCLUDE>$(CROSS_COMPILER_DIR)arm-none-linux-gnueabihf\libc\usr\include\</CROSS_COMPILER_INCLUDE>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(CROSS_COMPILER_INCLUDE);$(LINUX_KERNEL_INCLUDE);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(CROSS_COMPILER_INCLUDE);$(LINUX_KERNEL_INCLUDE);$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

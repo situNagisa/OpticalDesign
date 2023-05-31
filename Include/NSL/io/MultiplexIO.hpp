@@ -5,16 +5,6 @@
 #include "NSL/file/File.h"
 
 //”√”⁄≤‚ ‘
-#if NGS_PLATFORM == NGS_WINDOWS
-NGS_C struct pollfd
-{
-	int fd;			/* File descriptor to poll.  */
-	short int events;		/* Types of events poller cares about.  */
-	short int revents;		/* Types of events that actually occurred.  */
-};
-
-extern int poll(struct pollfd* __fds, nfds_t __nfds, int __timeout);
-#endif
 
 nsl::MultIO::Tag::operator ngs::type::int16()const {
 	ngs::int16 flag = 0;

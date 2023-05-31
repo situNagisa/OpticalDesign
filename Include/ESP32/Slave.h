@@ -36,6 +36,7 @@ public:
 	void Update() {
 		_UpdateIIC();
 		_gyro.Update();
+		_motor.Update();
 	}
 	void Close() {
 		_is_opened = false;
@@ -114,6 +115,9 @@ private:
 			break;
 		case EOD_GET_ANGULAR_VELOCITY_Z:
 			value = GetAngularVelocity().z;
+			break;
+		case EOD_GET_LINEAR_VELOCITY:
+			value = _motor.GetLinearVelocity();
 			break;
 		}
 		_Command(command, value);

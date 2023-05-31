@@ -17,11 +17,17 @@ struct ESP32_ProtocolsStruct {
 
 		return Size - Header.size();
 	}
-	static ngs::ByteArray Command(esp32_optical_design_command_e command, ngs::float32 floating) {
+	template<typename T>
+		requires (sizeof(T) <= 4)
+	static ngs::ByteArray Command(esp32_optical_design_command_e command, T floating) {
 		ngs::ByteArray byteArray;
 		byteArray.Write<ngs::byte>(EOD_HEADER);
 		byteArray.Write<ngs::byte>(command);
 		byteArray.Write(floating);
+
+		for (size_t i = 0; i < 4 - (sizeof(T)); i++)
+			byteArray.Write<ngs::byte>(0);
+
 		ngs::byte sum = 0;
 		std::ranges::for_each_n(byteArray.Data(), ESP32_ProtocolsStruct::Size - 1, [&sum](ngs::byte byte) { sum += byte; });
 		byteArray.Write(sum);

@@ -65,6 +65,15 @@ struct ColorRange {
 		cv::inRange(hsv, low, high, mask);
 		return mask;
 	}
+
+	std::array<int, 3> GetColor()const {
+		std::array<int, 3> result = {};
+		for (size_t i = 0; i < result.max_size(); i++)
+		{
+			result[i] = (low[i] + high[i]) / 2;
+		}
+		return result;
+	}
 };
 
 namespace color_defined {

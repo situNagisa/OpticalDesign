@@ -19,9 +19,6 @@
     <Filter Include="头文件\bus">
       <UniqueIdentifier>{03b9ba7c-1086-4fe2-968f-9678adf9a7d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\gpio">
-      <UniqueIdentifier>{9cc79523-457a-491d-96bf-c72e32c2b894}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\devices">
       <UniqueIdentifier>{765f17f7-f432-4797-a26f-258aa27e60b1}</UniqueIdentifier>
     </Filter>
@@ -31,6 +28,12 @@
     <Filter Include="源文件\esp32">
       <UniqueIdentifier>{f174839f-97fe-478f-be08-50958c3bbd80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\io">
+      <UniqueIdentifier>{9cc79523-457a-491d-96bf-c72e32c2b894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ctrl">
+      <UniqueIdentifier>{962a0ab0-6ddd-4c09-ae53-8f5fd969ad19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PWM.cpp">
@@ -39,14 +42,17 @@
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\SPI.cpp">
       <Filter>源文件\esp32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\GPIO.cpp">
-      <Filter>源文件\esp32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\IIC.cpp">
       <Filter>源文件\esp32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\GPIO.cpp">
+      <Filter>头文件\io</Filter>
+    </ClCompile>
+    <ClCompile Include="PCNT.cpp">
+      <Filter>源文件\esp32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,9 +67,6 @@
     </ClInclude>
     <ClInclude Include="IIC.h">
       <Filter>头文件\bus</Filter>
-    </ClInclude>
-    <ClInclude Include="GPIO.h">
-      <Filter>头文件\gpio</Filter>
     </ClInclude>
     <ClInclude Include="Motor.h">
       <Filter>头文件\devices</Filter>
@@ -91,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="ESP32.h">
       <Filter>头文件\slave</Filter>
+    </ClInclude>
+    <ClInclude Include="Rangefinder.h">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Rangefinder.hpp">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="PCNT.h">
+      <Filter>头文件\ctrl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

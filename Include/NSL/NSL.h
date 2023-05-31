@@ -11,6 +11,8 @@
 #include "NSL/file/File.h"
 #include "NSL/file/DeviceFile.h"
 
+#include "NSL/media/V4L2.h"
+
 
 #ifdef NSL_USE_HEADER_IMPL
 
@@ -19,5 +21,6 @@
 #include "NSL/file/File.hpp"
 #include "NSL/io/GPIO.h"
 #include "NSL/io/MultiplexIO.hpp"
+#include "NSL/media/V4L2.hpp"
 
 #endif

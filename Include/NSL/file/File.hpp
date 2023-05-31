@@ -63,5 +63,10 @@ inline void File::Close() {
 inline int File::Write(ngs::byte_ptr_cst data, size_t size) { return write(_fd, data, size); }
 inline int File::Read(ngs::byte_ptr data, size_t size) { return read(_fd, data, size); }
 
+inline ngs::void_ptr File::MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset)
+{
+	return mmap(address, length, port, flag, _fd, offset);
+}
+
 
 NSL_END

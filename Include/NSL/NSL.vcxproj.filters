@@ -51,5 +51,14 @@
     <ClInclude Include="io\MultiplexIO.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="media\V4L2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="media\V4L2.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

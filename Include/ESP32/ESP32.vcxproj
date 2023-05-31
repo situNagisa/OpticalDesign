@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\PWM.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\bus\SPI.cpp" />
     <ClCompile Include="..\..\..\..\VisualStudioCode\OD\main\main.cpp" />
+    <ClCompile Include="PCNT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BusConcept.h" />
@@ -31,11 +32,13 @@
     <ClInclude Include="Defined.h" />
     <ClInclude Include="ESP32.h" />
     <ClInclude Include="esp32_idf.h" />
-    <ClInclude Include="GPIO.h" />
     <ClInclude Include="Gyroscope.h" />
     <ClInclude Include="IIC.h" />
     <ClInclude Include="Motor.h" />
+    <ClInclude Include="PCNT.h" />
     <ClInclude Include="PWM.h" />
+    <ClInclude Include="Rangefinder.h" />
+    <ClInclude Include="Rangefinder.hpp" />
     <ClInclude Include="Register.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Slave.h" />

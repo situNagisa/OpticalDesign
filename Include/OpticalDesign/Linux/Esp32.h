@@ -19,20 +19,21 @@ namespace devices {
 			_driver.Close();
 		}
 		void Update() {
-			std::array<esp32_optical_design_command_e, 6> commands = {
+			std::array<esp32_optical_design_command_e, 7> commands = {
 				EOD_GET_ACCELERATION_X,
 				EOD_GET_ACCELERATION_Y,
 				EOD_GET_ACCELERATION_Z,
 				EOD_GET_ANGULAR_VELOCITY_X,
 				EOD_GET_ANGULAR_VELOCITY_Y,
 				EOD_GET_ANGULAR_VELOCITY_Z,
+				EOD_GET_LINEAR_VELOCITY,
 			};
 			for (auto command : commands) {
 				_Command(command);
 			}
 			size_t count = 0;
-			ngs::byte data[ESP32_ProtocolsStruct::Size * 8];
-			count = _driver.Read(data, ESP32_ProtocolsStruct::Size * 8);
+			ngs::byte data[ESP32_ProtocolsStruct::Size * (commands.size() + 2)];
+			count = _driver.Read(data, ESP32_ProtocolsStruct::Size * (commands.size() + 2));
 			if (count <= 0)return;
 			_parser.In(std::ranges::take_view(data, count));
 			_parser.Update();
@@ -46,6 +47,9 @@ namespace devices {
 		}
 		void SetAngularVelocityPercent(ngs::float32 percent) {
 			_Command(EOD_SET_ANGULAR_VELOCITY_PERCENT, percent);
+		}
+		ngs::float32 GetLinearVelocity()const {
+			return _linearVelocity;
 		}
 	private:
 		void _Command(esp32_optical_design_command_e command, ngs::float32 percent = 0.0f) {
@@ -85,14 +89,18 @@ namespace devices {
 			case EOD_GET_ANGULAR_VELOCITY_Z:
 				_angularVelocity.z = value;
 				break;
+			case EOD_GET_LINEAR_VELOCITY:
+				_linearVelocity = value;
+				break;
 			}
 		}
 	private:
+		ngs::float32 _linearVelocity = 0.0f;
 		ngs::Point3f
-			_acceleration,
-			_angularVelocity;
-		nsl::DeviceFile _driver;
-		ngs::ProtocolsStructParser<ESP32_ProtocolsStruct> _parser;
+			_acceleration = {},
+			_angularVelocity = {};
+		nsl::DeviceFile _driver = {};
+		ngs::ProtocolsStructParser<ESP32_ProtocolsStruct> _parser = {};
 	};
 	inline Esp32* g_esp32 = ngs::New(new Esp32());
 };
