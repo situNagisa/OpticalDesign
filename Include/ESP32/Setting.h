@@ -31,8 +31,12 @@ GYRO_SCLK = 15
 ;
 
 constexpr ngs::float32
-WHEEL_CIRCUMFERENCE = 0.04 * 0.04 * std::numbers::pi,
-PLUSE_COUNT_PER_RAD = 330
+WHEEL_CIRCUMFERENCE = 2 * 0.04 * std::numbers::pi,
+PLUSE_COUNT_PER_RAD = 330,
+
+WHEEL_SPEED_MAX_3_3 = 0.02f,
+WHEEL_SPEED_MAX_5_0 = 0.048f,
+WHEEL_SPEED_MAX_12_0 = 0.10f
 ;
 
 constexpr ngs::Point3f PID = { 0.1,0.01,0 };

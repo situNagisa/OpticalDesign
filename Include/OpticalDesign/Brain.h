@@ -19,8 +19,6 @@ public:
 public:
 	Brain()
 	{
-		ngs::Allocator::I().Show();
-
 		_world = ngs::New(new b2World({ 0,0 }));
 		_cerebellum = ngs::New(new Cerebellum());
 		_eyes = ngs::New(new Eyes());
@@ -35,7 +33,6 @@ public:
 		ngs::Delete(_cerebellum);
 		ngs::Delete(_foots);
 		ngs::Delete(_moveLogic);
-		ngs::Allocator::I().Show();
 	}
 
 	void Update() {
@@ -44,7 +41,7 @@ public:
 
 		_UpdateCerebellum();
 
-		//_UpdateBox2D();
+		_UpdateBox2D();
 
 		if (IsInMaze())
 			_UpdateLogic();
@@ -57,14 +54,11 @@ public:
 
 
 	bool TryToStart() {
-		ngs::MeasureExecutionTime<std::chrono::nanoseconds> time;
-
+		if (!_eyes->Initialize())return false;
 		_eyes->SetMode(Eyes::Mode::maze);
 		_eyes->Update();
 		if (!_eyes->GetMaze())return false;
 		_eyes->SetMode(Eyes::Mode::runtime);
-
-		ngs::Allocator::I().Show();
 
 		ngs::nos.Log("Brain::TryToStart", "识别迷宫成功\n");
 		_Initialize();
@@ -85,8 +79,10 @@ public:
 
 	void _UpdateCerebellum() {
 		_cerebellum->Update();
-		_body->ApplyForceToCenter(ngs_b2::TransformToBox2D(_cerebellum->GetAcceleration() * _body->GetMass()), true);
+		//_body->ApplyForceToCenter(ngs_b2::TransformToBox2D(_cerebellum->GetAcceleration() * _body->GetMass()), true);
 		_body->SetAngularVelocity(_cerebellum->GetAngularVelocity());
+		auto linearVelocity = _foots->GetLinearVelocity();
+		_body->SetLinearVelocity({ linearVelocity * std::cos(_body->GetAngle()),linearVelocity * std::sin(_body->GetAngle()) });
 	}
 	void _UpdateBox2D() {
 		auto now = std::chrono::high_resolution_clock::now();
@@ -103,6 +99,7 @@ public:
 		if (!ngs::Between(pos.y, maze.Top(), maze.Bottom()))return false;
 		return true;
 	}
+private:
 	void _UpdateLogic() {
 		_moveLogic->Update(ngs_b2::TransformToNGS(_body->GetPosition()));
 		if (_moveLogic->IsArrivedDst()) {
@@ -184,7 +181,7 @@ public:
 		}
 		ngs::nos.Log("Brain::_BuildBox2dWorld", "物理引擎 Box2D 初始化成功\n");
 	}
-public:
+private:
 	std::chrono::high_resolution_clock::time_point _timeRecord;
 	b2World* _world = nullptr;
 	b2Body* _body = nullptr;

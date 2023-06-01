@@ -93,6 +93,7 @@ namespace devices {
 				_linearVelocity = value;
 				break;
 			}
+			ngs::nos.Log("Esp32::_Parse", "command %02x value:%f\n", command, value);
 		}
 	private:
 		ngs::float32 _linearVelocity = 0.0f;

@@ -121,8 +121,8 @@ public:
 		return IOCtrlCode(request, std::forward<Args>(args)...) >= 0;
 	}
 
-	ngs::void_ptr MemoryMap(size_t length, int port, int flag, std::ptrdiff_t offset) { return MemoryMap(nullptr, length, port, flag, offset); }
-	ngs::void_ptr MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset);
+	ngs::void_ptr MemoryMap(size_t length, int port, int flag, std::ptrdiff_t offset = 0) { return MemoryMap(nullptr, length, port, flag, offset); }
+	ngs::void_ptr MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset = 0);
 private:
 
 private:

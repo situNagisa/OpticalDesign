@@ -34,8 +34,10 @@ namespace devices {
 	}
 	inline void Camera::Update() {
 		auto& data = *(_CameraData*)_data;
+
+		data.device.Update();
 		size_t size = data.device.GetFrameBufferSize();
-		if (size > data.data.max_size())
+		if (size > data.data.size())
 			data.data.resize(size);
 		if (!data.device.Read(data.data.data())) {
 			ngs::nos.Error("read camera data fail!\n");

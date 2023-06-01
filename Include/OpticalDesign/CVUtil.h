@@ -498,8 +498,10 @@ public:
 			if (buffers.size())ngs::nos.Log("Eyes::RecognizeMaze", "找到%ld个可能的图形\n", buffers.size());
 
 			//在符合要求的物体中找到最符合要求的物体
-			if (buffers.size() < 4)return {};
-
+			if (buffers.size() < 4) {
+				ngs::nos.Log("CVUtil::RecognizeMaze", "识别失败!找到的图形不足四个! %d\n", buffers.size());
+				return {};
+			}
 			std::sort(buffers.begin(), buffers.end(), [](const Buffer& a, const Buffer& b)->bool {
 				if (ngs::Abs(a.rect.Area() - b.rect.Area()) > area_threshold) return a.matchLevel < b.matchLevel;
 				return a.matchLevel < b.matchLevel;
@@ -540,7 +542,10 @@ public:
 			ngs::nos.Log("Eyes::RecognizeMaze", "识别成功!\n");
 		}
 
-		if (!corners.size())return {};
+		if (!corners.size()) {
+			ngs::nos.Log("CVUtil::RecognizeMaze", "识别失败!\n");
+			return {};
+		}
 
 		cv::Mat result{ WIDTH, HEIGHT, src.type() };
 		{

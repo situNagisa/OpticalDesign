@@ -17,7 +17,7 @@ struct _Wheel {
 		if (!_gpio0.IsOpened() && !_gpio0.Open(gpio0, ngs::GPIO::Mode::output))return false;
 		if (!_gpio1.IsOpened() && !_gpio1.Open(gpio1, ngs::GPIO::Mode::output))return false;
 		if (!_pwm.IsOpened() && !_pwm.Open(pwm))return false;
-		if (!_pcnt.IsOpened() && !_pcnt.Open(impulse0, impulse1, 100, 0))return false;
+		if (!_pcnt.IsOpened() && !_pcnt.Open(impulse0, impulse1, 100, -100))return false;
 
 		_is_opened = true;
 		ngs::nos.Log("_Wheel::Open", "gpio0:%d, gpio1:%d pwm:%d success!\n", gpio0, gpio1, pwm);
@@ -27,7 +27,7 @@ struct _Wheel {
 	}
 	void Update() {
 		_UpdatePCNT();
-		_aim_percent += _pid.GetOutput(_current_velocity, _aim_percent);
+		//_aim_percent += _pid.GetOutput(_current_velocity, _aim_percent);
 		_pwm.Set(_aim_percent);
 	}
 
@@ -58,15 +58,14 @@ struct _Wheel {
 private:
 	void _UpdatePCNT() {
 		auto count = _pcnt.GetPulseCount();
-		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(_end - _now);
+		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(_end - _now);
 
-		//_current_velocity;
-
+		_current_velocity = -((float)count / PLUSE_COUNT_PER_RAD) * WHEEL_CIRCUMFERENCE / duration.count() * 1'000'000;
 		_end = _now;
 		_now = std::chrono::high_resolution_clock::now();
 		_pcnt.ClearPulseCount();
 	}
-private:
+public:
 	std::chrono::high_resolution_clock::time_point _now = std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point _end = std::chrono::high_resolution_clock::now();
 
@@ -102,8 +101,9 @@ public:
 	}
 	bool IsOpened()const { return _is_opened; }
 	void Close() {
-		_Left().Close();
-		_Right().Close();
+		for (auto& wheel : _wheels) {
+			wheel.Close();
+		}
 		_is_opened = false;
 	}
 	void Update() {
@@ -129,7 +129,7 @@ private:
 	void _SetLinearVelocityPercent(float percent) {
 		int sgn = ngs::Sign(percent);
 		percent *= sgn;
-		for (auto wheel : _wheels) {
+		for (auto& wheel : _wheels) {
 			wheel.SetDirect(sgn);
 			wheel.SetVelocityPercent(percent);
 		}
@@ -139,7 +139,7 @@ private:
 		percent *= sgn;
 		_Left().SetDirect(sgn);
 		_Left().SetDirect(-sgn);
-		for (auto wheel : _wheels) {
+		for (auto& wheel : _wheels) {
 			wheel.SetVelocityPercent(percent);
 		}
 	}

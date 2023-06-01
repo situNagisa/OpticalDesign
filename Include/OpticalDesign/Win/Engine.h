@@ -17,4 +17,7 @@ namespace devices {
 	}
 	inline void Engine::SetAngularVelocityPercent(ngs::float32 percent) {
 	}
+	inline ngs::float32 Engine::GetLinearVelocity()const {
+		return 0.0f;
+	}
 }

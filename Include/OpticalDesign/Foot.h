@@ -32,6 +32,7 @@ public:
 			return;
 		}
 		_mode = Mode::Idle;
+		_linearVelocity = devices::g_engine->GetLinearVelocity();
 	}
 
 	void MoveTo(const Point& pos) {
@@ -39,6 +40,8 @@ public:
 	}
 
 	Mode GetMode()const { return _mode; }
+
+	ngs::float32 GetLinearVelocity()const { return _linearVelocity; }
 private:
 	void _RotatePercent(ngs::float32 angularSpeed) {
 		devices::g_engine->SetAngularVelocityPercent(angularSpeed);
@@ -72,6 +75,7 @@ private:
 	Point _aimPos;
 
 	Mode _mode;
+	ngs::float32 _linearVelocity = 0.0f;
 };
 
 

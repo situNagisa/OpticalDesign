@@ -88,6 +88,8 @@ namespace devices {
 
 		void SetLinearVelocityPercent(float percent);
 		void SetAngularVelocityPercent(float percent);
+
+		ngs::float32 GetLinearVelocity()const;
 	private:
 		ngs::void_ptr _data;
 		//static_assert(Device_c<Engine>);

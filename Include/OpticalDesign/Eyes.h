@@ -31,6 +31,12 @@ public:
 			_curMaze = nullptr;
 		}
 	}
+	bool Initialize() {
+		if (!devices::g_camera->IsOpened() && !devices::g_camera->Open()) {
+			return false;
+		}
+		return true;
+	}
 	void Update() {
 		devices::g_camera->Update();
 		switch (_mode)
@@ -78,14 +84,9 @@ private:
 	bool _RecognizeMaze() {
 		cv::Mat temp = CVUtil::RecognizeMaze<IMAGE_SIZE.x, IMAGE_SIZE.y>(_GetView());
 		if (temp.empty()) {
-			if constexpr (DEBUG_EYES) {
-				cv::imshow("", temp);
-				cv::waitKey();
-				return false;
-			}
-			else
-				return false;
+			return false;
 		}
+		ngs::nos.Log("Eyes::_RecognizeMaze", "识别到迷宫\n");
 		_curImage = temp;
 		return true;
 	}
@@ -340,7 +341,7 @@ private:
 
 	cv::Mat _GetView() {
 		//如果有摄像头设备可以注释掉这个return
-		return cv::imread(TEST_PICTURE);
+		//return cv::imread(TEST_PICTURE);
 
 		if (!devices::g_camera->IsOpened() && !devices::g_camera->Open())
 			return {};
@@ -348,8 +349,6 @@ private:
 		std::vector<ngs::byte> data = devices::g_camera->Get();
 		if (data.empty())return {};
 		cv::Mat image = cv::imdecode(data, cv::ImreadModes::IMREAD_COLOR);
-		cv::imshow("", image);
-		cv::waitKey();
 		return image;
 	}
 private:
