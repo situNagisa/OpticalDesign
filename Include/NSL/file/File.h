@@ -89,7 +89,7 @@ public:
 	bool Open() { return Open(DefaultOpenMode()); }
 	bool Open(OpenMode mode) { return Open(_path, mode); }
 	bool Open(__path_ref_cst path) { return Open(path, DefaultOpenMode()); }
-	bool Open(__path_ref_cst path, OpenMode mode);
+	virtual bool Open(__path_ref_cst path, OpenMode mode);
 
 	int Offset(int offset);
 	int OffsetHead(int offset = 0);

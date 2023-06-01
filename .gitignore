@@ -307,3 +307,16 @@ Temp/Compile/x64/Debug/std.ixx.ifc.dt.module.json.command
 Temp/Compile/x64/Debug/test.obj
 Temp/Compile/x64/Debug/vc143.idb
 Temp/Compile/x64/Debug/vc143.pdb
+Drivers/obj/x64/Debug/BuildDriver.Build.CppClean.log
+Bin/x64/Debug/OpticalDesign.pdb
+Bin/x64/Debug/OpticalDesign.exe
+Bin/x64/Debug/Box2DUI.pdb
+Bin/x64/Debug/Box2DUI.exe
+.vs/OpticalDesign/v17/ipch/AutoPCH/da276c5696fa709e/LINUXDEVICE.ipch
+.vs/OpticalDesign/v17/ipch/AutoPCH/61825232e135fb7a/FRAMEBUFFER.ipch
+.vs/OpticalDesign/v17/ipch/AutoPCH/44b87644e5aeefca/FRAMEBUFFER.ipch
+.vs/OpticalDesign/v17/ipch/AutoPCH/35f2179efd64f3a7/UVC_WXZOU_DEMO.ipch
+.vs/OpticalDesign/FileContentIndex/eed37d7a-9bef-4834-8e05-cb8d65e36e08.vsidx
+.vs/OpticalDesign/FileContentIndex/5b4ec19a-d6f1-469e-bf8a-fe8dd555afb6.vsidx
+.vs/OpticalDesign/FileContentIndex/1e19819e-1b88-4055-ae54-9e790b01c7db.vsidx
+.vs/cmake.db

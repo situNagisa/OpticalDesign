@@ -28,6 +28,8 @@
     <ClInclude Include="io\MultiplexIO.h" />
     <ClInclude Include="io\MultiplexIO.hpp" />
     <ClInclude Include="LinuxHeader.h" />
+    <ClInclude Include="media\FrameBuffer.h" />
+    <ClInclude Include="media\FrameBuffer.hpp" />
     <ClInclude Include="media\V4L2.h" />
     <ClInclude Include="NSL.h" />
   </ItemGroup>

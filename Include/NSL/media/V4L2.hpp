@@ -109,6 +109,7 @@ inline void V4L2::LoadDeviceDescription() {
 	frm_size.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	frm_ival.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 
+	description.index++;
 	while (data.device.IOCtrl(VIDIOC_ENUM_FMT, &description)) {
 		frm_size.index = 0;
 		frm_size.pixel_format = description.pixelformat;
@@ -151,6 +152,7 @@ inline void V4L2::LoadDeviceDescription() {
 		}
 		description.index++;
 	}
+	ngs::nos.Log("V4L2::LoadDeviceDescription", "descriptions %d\n", data.descriptions.size());
 }
 
 inline std::vector<ngs::PixelFormat> V4L2::GetSupportPixelFormat() const

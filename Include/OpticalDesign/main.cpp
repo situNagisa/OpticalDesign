@@ -66,28 +66,19 @@ void TEST_RecognizeTreasure() {
 
 void V4L2Test() {
 	nsl::V4L2 v4l2;
-	if (!v4l2.Open("/dev/video1") || !v4l2.Initialize(640, 480, ngs::PixelFormat::MJPEG)) {
+	if (!v4l2.Open("/dev/video1") || !v4l2.Initialize(320, 180, ngs::PixelFormat::MJPEG)) {
 		ngs::nos.Error("open fail!\n");
 		return;
 	}
-	nsl::DeviceFile fb("/dev/fb0");
-	if (!fb.Open()) {
+	nsl::FrameBuffer fb;
+	if (!fb.Open("/dev/fb0")) {
 		ngs::nos.Error("open fb fail!\n");
 		return;
 	}
-	fb_var_screeninfo var = {};
-	fb_fix_screeninfo fix = {};
 
-	fb.IOCtrl(FBIOGET_VSCREENINFO, &var);
-	fb.IOCtrl(FBIOGET_FSCREENINFO, &fix);
+	ngs::nos.Log("main", "width %d,height %d\n", fb.GetWidth(), fb.GetHeight());
 
-	size_t size = fix.line_length * var.yres;
-	size_t width = var.xres;
-	size_t height = var.yres;
-
-	ngs::nos.Log("main", "width %d,height %d\n");
-
-	ngs::ARGB16* screen = (ngs::ARGB16*)fb.MemoryMap(size, PROT_READ | PROT_WRITE, MAP_SHARED);
+	ngs::BGRA16* screen = fb.GetData<ngs::BGRA16>();
 
 	std::vector<ngs::byte> data;
 	while (true) {
@@ -99,10 +90,10 @@ void V4L2Test() {
 		v4l2.Read(data.data());
 		cv::Mat image = cv::imdecode(data, cv::ImreadModes::IMREAD_COLOR);
 		ngs::nos.Log("main", "start convert\n");
-		for (size_t y = 0; y < image.rows; y++) {
-			for (size_t x = 0; x < image.cols; x++) {
+		for (size_t y = 0; y < image.rows; y += 4) {
+			for (size_t x = 0; x < image.cols; x += 4) {
 				auto argb24 = image.ptr<ngs::ARGB24>(y, x);
-				screen[y * width + x] = (ngs::ARGB16)(*argb24);
+				screen[y * fb.GetWidth() + x] = ngs::BGRA16(argb24->StdBlue(), argb24->StdGreen(), argb24->StdRed(), argb24->StdAlpha());
 			}
 		}
 	}
@@ -113,6 +104,7 @@ int main() {
 	ngs::Allocator::I().Show();
 
 	RunBrain();
+	//V4L2Test();
 
 	ngs::Allocator::I().Show();
 

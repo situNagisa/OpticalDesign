@@ -13,6 +13,8 @@
 
 #include "NSL/media/V4L2.h"
 
+#include "NSL/media/FrameBuffer.h"
+
 
 #ifdef NSL_USE_HEADER_IMPL
 
@@ -22,5 +24,7 @@
 #include "NSL/io/GPIO.h"
 #include "NSL/io/MultiplexIO.hpp"
 #include "NSL/media/V4L2.hpp"
+
+#include "NSL/media/FrameBuffer.hpp"
 
 #endif

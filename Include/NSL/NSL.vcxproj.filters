@@ -60,5 +60,11 @@
     <ClInclude Include="Defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="media\FrameBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="media\FrameBuffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

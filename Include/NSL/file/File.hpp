@@ -65,7 +65,11 @@ inline int File::Read(ngs::byte_ptr data, size_t size) { return read(_fd, data, 
 
 inline ngs::void_ptr File::MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset)
 {
-	return mmap(address, length, port, flag, _fd, offset);
+	auto map = mmap(address, length, port, flag, _fd, offset);
+#if NGS_BUILD_TYPE == NGS_DEBUG
+	if (map == MAP_FAILED)return nullptr;
+#endif
+	return map;
 }
 
 
