@@ -1,4 +1,5 @@
-
+Temp/*
+Bin/*
 .vs/OpticalDesign/FileContentIndex/d3c415da-33fb-4ff7-a984-1cecf6aa6f3a.vsidx
 .vs/OpticalDesign/FileContentIndex/read.lock
 .vs/OpticalDesign/v17/Browse.VC.db
@@ -320,3 +321,8 @@ Bin/x64/Debug/Box2DUI.exe
 .vs/OpticalDesign/FileContentIndex/5b4ec19a-d6f1-469e-bf8a-fe8dd555afb6.vsidx
 .vs/OpticalDesign/FileContentIndex/1e19819e-1b88-4055-ae54-9e790b01c7db.vsidx
 .vs/cmake.db
+Bin/x64/Debug/Box2DUI.exe
+Bin/x64/Debug/Box2DUI.pdb
+Bin/x64/Debug/GyroSDKTest.exe
+Bin/x64/Debug/OpticalDesign.exe
+Bin/x64/Debug/OpticalDesign.pdb

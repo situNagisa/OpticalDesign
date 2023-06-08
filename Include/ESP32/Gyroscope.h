@@ -33,6 +33,9 @@ public:
 		_gyro->Update();
 		_acceleration = _gyro->GetAcceleration();
 		_angularVelocity = _gyro->GetAngularVelocity();
+		_angularVelocity.x = ngs::AsRadian(_angularVelocity.x);
+		_angularVelocity.y = ngs::AsRadian(_angularVelocity.y);
+		_angularVelocity.z = ngs::AsRadian(_angularVelocity.z);
 		/*if (!_gyro->IsActive())return;
 		ngs::nos.Log("Gyroscope::Update", "\nacc:%.2f \t%.2f\t %.2f\t\ngyro:%.2f\t %.2f\t %.2f\t\n",
 			_acceleration.x, _acceleration.y, _acceleration.z,
@@ -57,9 +60,9 @@ private:
 		));
 
 		//_gyro->ReadTable(wit::ReadDataDefined::ACC, wit::ReadDataDefined::GYRO);
-		_gyro->ActiveRegister(wit::Register::AX);
-		_gyro->ActiveRegister(wit::Register::AY);
-		_gyro->ActiveRegister(wit::Register::AZ);
+		//_gyro->ActiveRegister(wit::Register::AX);
+		//_gyro->ActiveRegister(wit::Register::AY);
+		//_gyro->ActiveRegister(wit::Register::AZ);
 		_gyro->ActiveRegister(wit::Register::GX);
 		_gyro->ActiveRegister(wit::Register::GY);
 		_gyro->ActiveRegister(wit::Register::GZ);
@@ -84,7 +87,7 @@ private:
 		_gyro->Write(wit::Register::Table::AXIS6, (ngs::uint16)wit::Register::Config::AXIS6::_9);
 		_gyro->Write(wit::Register::Table::RRATE, (ngs::uint16)wit::Register::Config::RRATE::_200);
 		_gyro->Write(wit::Register::Table::BANDWIDTH, (ngs::uint16)wit::Register::Config::BANDWIDTH::_256);
-		_gyro->Write(wit::Register::Table::FILTK, (ngs::uint16)wit::Register::Config::FILTK::_2000);
+		_gyro->Write(wit::Register::Table::FILTK, (ngs::uint16)wit::Register::Config::FILTK::Default);
 
 		return true;
 	}

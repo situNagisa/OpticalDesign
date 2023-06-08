@@ -8,6 +8,9 @@
 
 OPT_BEGIN
 
+using namespace std::chrono_literals;
+
+constexpr ngs::float32 SPEED = 0.3f;
 class Foot {
 public:
 	enum class Mode {
@@ -22,13 +25,11 @@ public:
 		_angle = angle;
 
 		if (_RequireRotate()) {
-			devices::g_engine->SetAngularVelocityPercent(ngs::Sign(_GetDeltaAngle()) * 1.0f);
-			_mode = Mode::Rotating;
+			_RotatePercent(ngs::Sign(_GetDeltaAngle()) * SPEED);
 			return;
 		}
 		if (_RequireMove()) {
-			devices::g_engine->SetLinearVelocityPercent(1.0f);
-			_mode = Mode::Running;
+			_MovePercent(SPEED);
 			return;
 		}
 		_mode = Mode::Idle;
@@ -41,13 +42,29 @@ public:
 
 	Mode GetMode()const { return _mode; }
 
+	void Rotate90(int direct) {
+		_RotatePercent(direct * 0.61f);
+		std::this_thread::sleep_for(500ms);
+		_RotatePercent(0);
+	}
+	void LittleRotate(int direct) {
+		_RotatePercent(direct * 0.05f);
+		std::this_thread::sleep_for(100ms);
+		_RotatePercent(0);
+	}
+	void StopTime(int ms = 200) {
+		_MovePercent(0);
+		std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+	}
 	ngs::float32 GetLinearVelocity()const { return _linearVelocity; }
-private:
+public:
 	void _RotatePercent(ngs::float32 angularSpeed) {
 		devices::g_engine->SetAngularVelocityPercent(angularSpeed);
+		_mode = Mode::Rotating;
 	}
 	void _MovePercent(ngs::float32 speed) {
 		devices::g_engine->SetLinearVelocityPercent(speed);
+		_mode = Mode::Running;
 	}
 	Point _GetDistance()const { return _aimPos - _position; }
 	float _GetDeltaAngle() const {

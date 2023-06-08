@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="ESP32\esp32.c" />
     <ClCompile Include="ESP32\esp32App.c" />
+    <ClCompile Include="JY901B\jy901b.c" />
     <ClCompile Include="OV5640\mx6s_capture.c" />
     <ClCompile Include="OV5640\mxc_mipi_csi.c" />
     <ClCompile Include="OV5640\mxc_vadc.c" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ESP32\Makefile" />
+    <None Include="JY901B\Makefile" />
     <None Include="OV5640\Makefile" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

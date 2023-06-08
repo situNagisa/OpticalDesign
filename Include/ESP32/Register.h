@@ -15,6 +15,7 @@ enum esp32_optical_design_command_e : unsigned char {
 	EOD_GET_ANGULAR_VELOCITY_Y,
 	EOD_GET_ANGULAR_VELOCITY_Z,
 	EOD_GET_LINEAR_VELOCITY,
+	EOD_GET_GRAY,
 	EOD_COMMAND_MAX,
 };
 

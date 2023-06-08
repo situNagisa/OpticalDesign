@@ -32,6 +32,8 @@
     <ClInclude Include="Defined.h" />
     <ClInclude Include="ESP32.h" />
     <ClInclude Include="esp32_idf.h" />
+    <ClInclude Include="Grayscale.h" />
+    <ClInclude Include="Grayscale.hpp" />
     <ClInclude Include="Gyroscope.h" />
     <ClInclude Include="IIC.h" />
     <ClInclude Include="Motor.h" />

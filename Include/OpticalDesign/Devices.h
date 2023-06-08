@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NGS/NGS.h"
+#include "opencv2/opencv.hpp"
 
 namespace devices {
 
@@ -22,9 +23,9 @@ namespace devices {
 
 		bool IsOpened()const;
 
-		const std::vector<ngs::byte>& Get();
+		std::vector<ngs::byte> Get();
 	private:
-		ngs::void_ptr _data;
+		ngs::void_ptr _data = nullptr;
 
 		//static_assert(Device_c<Camera>);
 	};
@@ -37,23 +38,9 @@ namespace devices {
 		void Update();
 		bool IsOpened()const;
 
-		ngs::byte& operator[](size_t pos);
-		const ngs::byte& operator[](size_t pos)const;
-
-		size_t Width()const;
-		size_t Height()const;
-		size_t Depth()const;
-		size_t Size()const;
-
-		void Write(size_t pos, const ngs::byte_ptr data, size_t size);
-		void Write(size_t x, size_t y, ngs::byte_ptr_cst data);
-
-		ngs::byte Read(size_t pos)const;
-		ngs::byte Read(size_t x, size_t y)const;
-
-		void Full(ngs::byte_ptr_cst data);
+		void Show(const cv::Mat&);
 	private:
-		ngs::void_ptr _data;
+		ngs::void_ptr _data = nullptr;
 
 		//static_assert(Device_c<Screen>);
 	};
@@ -74,7 +61,7 @@ namespace devices {
 		float GetAngularVelocityY()const;
 		float GetAngularVelocityZ()const;
 	private:
-		ngs::void_ptr _data;
+		ngs::void_ptr _data = nullptr;
 		//static_assert(Device_c<Gyroscope>);
 	};
 
@@ -91,7 +78,7 @@ namespace devices {
 
 		ngs::float32 GetLinearVelocity()const;
 	private:
-		ngs::void_ptr _data;
+		ngs::void_ptr _data = nullptr;
 		//static_assert(Device_c<Engine>);
 	};
 

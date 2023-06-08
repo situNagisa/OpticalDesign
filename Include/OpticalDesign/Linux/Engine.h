@@ -19,6 +19,7 @@ namespace devices {
 		return g_esp32->IsOpened();
 	}
 	inline void Engine::Update() {
+
 	}
 	inline void Engine::SetLinearVelocityPercent(ngs::float32 percent) {
 		g_esp32->SetLinearVelocityPercent(percent);

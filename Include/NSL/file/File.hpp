@@ -72,5 +72,10 @@ inline ngs::void_ptr File::MemoryMap(ngs::void_ptr address, size_t length, int p
 	return map;
 }
 
+inline bool File::MemoryUnMap(ngs::void_ptr address, size_t size)
+{
+	return munmap(address, size) >= 0;
+}
+
 
 NSL_END

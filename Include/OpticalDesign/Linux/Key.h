@@ -42,6 +42,8 @@ namespace devices {
 		}
 		Type GetState()const { return _state; }
 
+		bool IsDown()const { return _state == Type::down; }
+
 	private:
 		nsl::DeviceFile _driver;
 		Type _state;

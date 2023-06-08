@@ -1,1 +1,49 @@
-﻿
+﻿G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32.c(3,25): error : linux/delay.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32.c(3,25): error :  #include <linux/delay.h>
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32.c(3,25): error :                          ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32.c(3,25): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\Register.h(4,1): error : C++ style comments are not allowed in ISO C90
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\Register.h(4,1): error :  // | 0 | 1 | 2 | 3 | 4 | 5 |
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\Register.h(4,1): error :  ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\Register.h(4,1): error : (this will be reported only once per input file)
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,36): warning : passing argument 2 of ‘strtol’ from incompatible pointer type [-Wincompatible-pointer-types]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,36): warning :    command[i - 1] = strtol(argv[i], &endptr, 16);
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,36): warning :                                     ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,20): warning : conversion to ‘unsigned char’ from ‘long int’ may alter its value [-Wconversion]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,20): warning :    command[i - 1] = strtol(argv[i], &endptr, 16);
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(61,20): warning :                     ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(64,9): warning : conversion to ‘int’ from ‘ssize_t {aka long int}’ may alter its value [-Wconversion]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(64,9): warning :    ret = write(fd, command, sizeof(command));
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(64,9): warning :          ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(68,9): warning : conversion to ‘int’ from ‘ssize_t {aka long int}’ may alter its value [-Wconversion]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(68,9): warning :    ret = read(fd, data, 36);
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(68,9): warning :          ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(40,6): warning : variable ‘ret’ set but not used [-Wunused-but-set-variable]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(40,6): warning :   int ret = 0;
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(40,6): warning :       ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,26): warning : unused variable ‘ps’ [-Wunused-variable]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,26): warning :   unsigned short ir, als, ps;
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,26): warning :                           ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,21): warning : unused variable ‘als’ [-Wunused-variable]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,21): warning :   unsigned short ir, als, ps;
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,21): warning :                      ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,17): warning : unused variable ‘ir’ [-Wunused-variable]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,17): warning :   unsigned short ir, als, ps;
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(39,17): warning :                  ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(38,17): warning : unused variable ‘databuf’ [-Wunused-variable]
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(38,17): warning :   unsigned short databuf[3];
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\ESP32\esp32App.c(38,17): warning :                  ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\JY901B\jy901b.c(3,25): error : linux/delay.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\JY901B\jy901b.c(3,25): error :  #include <linux/delay.h>
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\JY901B\jy901b.c(3,25): error :                          ^
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\JY901B\jy901b.c(3,25): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mx6s_capture.c(21,21): error : asm/dma.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mx6s_capture.c(21,21): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mxc_mipi_csi.c(26,23): error : linux/clk.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mxc_mipi_csi.c(26,23): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mxc_vadc.c(21,23): error : linux/clk.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\mxc_vadc.c(21,23): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\ov5640.c(21,23): error : linux/clk.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\ov5640.c(21,23): error : compilation terminated.
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\ov5640_mipi.c(14,26): error : linux/module.h: 没有那个文件或目录
+G:\Projects\C_CPP\VisualStudio\OpticalDesign\Drivers\OV5640\ov5640_mipi.c(14,26): error : compilation terminated.

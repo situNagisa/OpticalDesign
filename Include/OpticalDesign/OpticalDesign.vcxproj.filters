@@ -119,5 +119,14 @@
     <ClInclude Include="Linux\Key.h">
       <Filter>头文件\device\linux</Filter>
     </ClInclude>
+    <ClInclude Include="Win\Screen.hpp">
+      <Filter>头文件\device\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Linux\Screen.hpp">
+      <Filter>头文件\device\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="GrayscaleLogic.h">
+      <Filter>头文件\ctrl</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

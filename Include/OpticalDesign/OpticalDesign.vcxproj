@@ -36,6 +36,7 @@
     <ClInclude Include="DeviceConfig.h" />
     <ClInclude Include="Eyes.h" />
     <ClInclude Include="Foot.h" />
+    <ClInclude Include="GrayscaleLogic.h" />
     <ClInclude Include="LinuxDevice.h" />
     <ClInclude Include="Linux\Camera.h" />
     <ClInclude Include="Linux\Engine.h" />
@@ -43,6 +44,7 @@
     <ClInclude Include="Linux\Gyroscope.h" />
     <ClInclude Include="Linux\Key.h" />
     <ClInclude Include="Linux\NSLConfig.h" />
+    <ClInclude Include="Linux\Screen.hpp" />
     <ClInclude Include="Maze.h">
       <SubType>
       </SubType>
@@ -55,6 +57,7 @@
     <ClInclude Include="Win\Camera.h" />
     <ClInclude Include="Win\Engine.h" />
     <ClInclude Include="Win\Gyroscope.h" />
+    <ClInclude Include="Win\Screen.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

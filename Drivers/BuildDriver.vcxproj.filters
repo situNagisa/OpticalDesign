@@ -36,6 +36,7 @@
     <ClCompile Include="OV5640\ov5640_mipi.c">
       <Filter>source\ov5640</Filter>
     </ClCompile>
+    <ClCompile Include="JY901B\jy901b.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ESP32\Register.h">
@@ -52,5 +53,6 @@
     <None Include="OV5640\Makefile">
       <Filter>source\ov5640</Filter>
     </None>
+    <None Include="JY901B\Makefile" />
   </ItemGroup>
 </Project>

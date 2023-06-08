@@ -16,6 +16,7 @@ struct _Wheel {
 	) {
 		if (!_gpio0.IsOpened() && !_gpio0.Open(gpio0, ngs::GPIO::Mode::output))return false;
 		if (!_gpio1.IsOpened() && !_gpio1.Open(gpio1, ngs::GPIO::Mode::output))return false;
+		_gpio1.Low();
 		if (!_pwm.IsOpened() && !_pwm.Open(pwm))return false;
 		if (!_pcnt.IsOpened() && !_pcnt.Open(impulse0, impulse1, 100, -100))return false;
 
@@ -26,7 +27,7 @@ struct _Wheel {
 		return true;
 	}
 	void Update() {
-		_UpdatePCNT();
+		//_UpdatePCNT();
 		//_aim_percent += _pid.GetOutput(_current_velocity, _aim_percent);
 		_pwm.Set(_aim_percent);
 	}
@@ -138,7 +139,7 @@ private:
 		int sgn = ngs::Sign(percent);
 		percent *= sgn;
 		_Left().SetDirect(sgn);
-		_Left().SetDirect(-sgn);
+		_Right().SetDirect(-sgn);
 		for (auto& wheel : _wheels) {
 			wheel.SetVelocityPercent(percent);
 		}

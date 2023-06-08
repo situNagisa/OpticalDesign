@@ -319,11 +319,17 @@ public:
 		_UpdateWalls();
 		_UpdateRoads();
 	}
+	static bool IsInMaze(Point pos) {
+		auto maze = GetBounds();
+		if (!ngs::Between(pos.x, maze.Left(), maze.Right()))return false;
+		if (!ngs::Between(pos.y, maze.Top(), maze.Bottom()))return false;
+		return true;
+	}
 
-	Rect GetBounds()const { return Rect{ 0,0,(float)WIDTH,(float)HEIGHT }; }
-	Point GetCenter()const { return Point{ (float)(WIDTH / 2), (float)(HEIGHT / 2) }; }
+	static Rect GetBounds() { return Rect{ 0,0,(float)WIDTH,(float)HEIGHT }; }
+	static Point GetCenter() { return Point{ (float)(WIDTH / 2), (float)(HEIGHT / 2) }; }
 	/** @brief 获取对称点 */
-	Point GetSymmetry(const Point& pos)const { return (2 * GetCenter()) - pos; }
+	static Point GetSymmetry(const Point& pos) { return (2 * GetCenter()) - pos; }
 
 	RouteInfo StraightTo(const Point& from, const Point& to)const {
 		std::vector<Point> visited = { from };

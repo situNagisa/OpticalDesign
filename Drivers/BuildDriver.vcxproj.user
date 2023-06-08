@@ -48,4 +48,7 @@
     <RemoteTarget>958464895;192.168.152.128 (username=, port=22, authentication=Password)</RemoteTarget>
     <SourceMap>$(ProjectDir)ESP32\ = ~/download/test/;$(SourceMap)</SourceMap>
   </PropertyGroup>
+  <PropertyGroup>
+    <ShowAllFiles>true</ShowAllFiles>
+  </PropertyGroup>
 </Project>

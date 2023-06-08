@@ -3,7 +3,7 @@
 
 #include "NGS/NGS.h"
 
-int main()
+int main222()
 {
 	ngs::uint32 port = 9;
 	//std::cout << "请输入端口号：COM";

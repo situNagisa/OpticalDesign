@@ -19,25 +19,30 @@ namespace devices {
 			_driver.Close();
 		}
 		void Update() {
-			std::array<esp32_optical_design_command_e, 7> commands = {
-				EOD_GET_ACCELERATION_X,
+			constexpr std::array<esp32_optical_design_command_e, 1> commands = {
+				/*EOD_GET_ACCELERATION_X,
 				EOD_GET_ACCELERATION_Y,
-				EOD_GET_ACCELERATION_Z,
-				EOD_GET_ANGULAR_VELOCITY_X,
+				EOD_GET_ACCELERATION_Z,*/
+				/*EOD_GET_ANGULAR_VELOCITY_X,
 				EOD_GET_ANGULAR_VELOCITY_Y,
 				EOD_GET_ANGULAR_VELOCITY_Z,
-				EOD_GET_LINEAR_VELOCITY,
+				EOD_GET_LINEAR_VELOCITY,*/
+				EOD_GET_GRAY,
 			};
+			_linearVelocity = 0.0f;
+			_acceleration.SetZero();
+			_angularVelocity.SetZero();
 			for (auto command : commands) {
 				_Command(command);
+				size_t count = 0;
+				constexpr size_t size = ESP32_ProtocolsStruct::Size * (2 * commands.size() + 2);
+				ngs::byte data[size];
+				count = _driver.Read(data, sizeof(data));
+				if (count <= 0)return;
+				_parser.In(std::ranges::take_view(data, count));
+				_parser.Update();
+				while (_parser.ParsedSize()) _Parse(_parser.ParsedPop());
 			}
-			size_t count = 0;
-			ngs::byte data[ESP32_ProtocolsStruct::Size * (commands.size() + 2)];
-			count = _driver.Read(data, ESP32_ProtocolsStruct::Size * (commands.size() + 2));
-			if (count <= 0)return;
-			_parser.In(std::ranges::take_view(data, count));
-			_parser.Update();
-			while (_parser.ParsedSize()) _Parse(_parser.ParsedPop());
 		}
 		const ngs::Point3f& GetAcceleration()const { return _acceleration; }
 		const ngs::Point3f& GetAngularVelocity()const { return _angularVelocity; }
@@ -51,6 +56,7 @@ namespace devices {
 		ngs::float32 GetLinearVelocity()const {
 			return _linearVelocity;
 		}
+		auto GetLevels()const { return _levels; }
 	private:
 		void _Command(esp32_optical_design_command_e command, ngs::float32 percent = 0.0f) {
 			ngs::ByteArray byteArray = ESP32_ProtocolsStruct::Command(command, percent);
@@ -92,8 +98,16 @@ namespace devices {
 			case EOD_GET_LINEAR_VELOCITY:
 				_linearVelocity = value;
 				break;
+			case EOD_GET_GRAY:
+				ngs::byte_ptr b = reinterpret_cast<ngs::byte_ptr>(&value);
+				for (size_t i = 0; i < _levels.size(); i++)
+				{
+					_levels[i] = ngs::Bits(*b, i);
+				}
+				//ngs::nos.Trace("0x%02x %f\n", *b, value);
+				break;
 			}
-			ngs::nos.Log("Esp32::_Parse", "command %02x value:%f\n", command, value);
+			//ngs::nos.Log("Esp32::_Parse", "command %02x value:%f\n", command, value);
 		}
 	private:
 		ngs::float32 _linearVelocity = 0.0f;
@@ -102,6 +116,8 @@ namespace devices {
 			_angularVelocity = {};
 		nsl::DeviceFile _driver = {};
 		ngs::ProtocolsStructParser<ESP32_ProtocolsStruct> _parser = {};
+
+		std::array<bool, 8> _levels = {};
 	};
 	inline Esp32* g_esp32 = ngs::New(new Esp32());
 };

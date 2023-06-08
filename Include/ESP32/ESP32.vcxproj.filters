@@ -104,5 +104,11 @@
     <ClInclude Include="PCNT.h">
       <Filter>头文件\ctrl</Filter>
     </ClInclude>
+    <ClInclude Include="Grayscale.h">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Grayscale.hpp">
+      <Filter>头文件\devices</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

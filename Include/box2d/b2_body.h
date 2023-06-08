@@ -170,6 +170,10 @@ public:
 	/// @return the world position of the body's origin.
 	const b2Vec2& GetPosition() const;
 
+	/// Get the world body origin position.
+	/// @return the world position of the body's origin.
+	b2Vec2& GetPosition();
+
 	/// Get the angle in radians.
 	/// @return the current world rotation angle in radians.
 	float GetAngle() const;
@@ -408,13 +412,13 @@ private:
 	// m_flags
 	enum
 	{
-		e_islandFlag		= 0x0001,
-		e_awakeFlag			= 0x0002,
-		e_autoSleepFlag		= 0x0004,
-		e_bulletFlag		= 0x0008,
-		e_fixedRotationFlag	= 0x0010,
-		e_enabledFlag		= 0x0020,
-		e_toiFlag			= 0x0040
+		e_islandFlag = 0x0001,
+		e_awakeFlag = 0x0002,
+		e_autoSleepFlag = 0x0004,
+		e_bulletFlag = 0x0008,
+		e_fixedRotationFlag = 0x0010,
+		e_enabledFlag = 0x0020,
+		e_toiFlag = 0x0040
 	};
 
 	b2Body(const b2BodyDef* bd, b2World* world);
@@ -483,6 +487,11 @@ inline const b2Vec2& b2Body::GetPosition() const
 	return m_xf.p;
 }
 
+inline b2Vec2& b2Body::GetPosition()
+{
+	return m_xf.p;
+}
+
 inline float b2Body::GetAngle() const
 {
 	return m_sweep.a;
@@ -505,7 +514,7 @@ inline void b2Body::SetLinearVelocity(const b2Vec2& v)
 		return;
 	}
 
-	if (b2Dot(v,v) > 0.0f)
+	if (b2Dot(v, v) > 0.0f)
 	{
 		SetAwake(true);
 	}

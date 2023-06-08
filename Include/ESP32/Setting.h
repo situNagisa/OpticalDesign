@@ -26,9 +26,11 @@ MOTOR_R_IMPULSE0 = 11,
 MOTOR_R_IMPULSE1 = 12,
 MOTOR_R_PWM = 13,
 
-GYRO_SDA = 7,
-GYRO_SCLK = 15
+GYRO_SDA = 15,
+GYRO_SCLK = 7
 ;
+
+constexpr std::array<ngs::pin_t, 8> GRAY = { 21,47,48,45,16,17,18,8 };
 
 constexpr ngs::float32
 WHEEL_CIRCUMFERENCE = 2 * 0.04 * std::numbers::pi,

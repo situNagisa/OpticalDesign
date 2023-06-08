@@ -560,8 +560,8 @@ public:
 			srcPointP.push_back(corners[3]);
 
 			dstPointP.push_back(cv::Point2f(0, 0));
-			dstPointP.push_back(cv::Point2f(0, HEIGHT));
 			dstPointP.push_back(cv::Point2f(WIDTH, 0));
+			dstPointP.push_back(cv::Point2f(0, HEIGHT));
 			dstPointP.push_back(cv::Point2f(WIDTH, HEIGHT));
 
 			//获得透视变换矩阵
@@ -577,17 +577,26 @@ public:
 		const ColorRange& CardRange,
 		const ColorRange& PatternRange
 	) {
-		cv::resize(source, source, { IMAGE_SIZE.x,IMAGE_SIZE.y });
+		ngs::Point2i image_size = { 350,350 };
+		cv::Mat dst;
+		cv::resize(source, dst, { image_size.x ,(int)((float)image_size.x * source.rows / source.cols) });
+		image_size.x = dst.cols;
+		image_size.y = dst.rows;
 
 		/*cv::imshow("", source);
 		cv::waitKey();*/
 
-		auto bounds = _RecognizeCardColor(source, CardRange);
+		auto bounds = _RecognizeCardColor(dst, CardRange);
 		if (bounds.size() == 0) {
 			ngs::nos.Warning("未找到指定的颜色范围内的轮廓\n");
 			return { {},{},Treasure::Form::unknown };
 		}
-		auto form = _RecognizePattern(source, PatternRange, bounds[0]);
+		Treasure::Form form = Treasure::Form::unknown;
+		for (auto& bound : bounds) {
+			form = _RecognizePattern(dst(ngs_cv::Convert(bound)), PatternRange);
+			if (form != Treasure::Form::unknown)break;
+		}
+
 		Treasure treasure = {};
 		treasure.card = ngs_cv::Convert(CardRange.GetColor());
 		treasure.pattern = ngs_cv::Convert(PatternRange.GetColor());
@@ -601,7 +610,7 @@ public:
 		const ColorRange& CardRange
 	) {
 		constexpr Point min_rate = { 0.05,0.05 };
-		constexpr Point max_rate = { 0.6,0.6 };
+		constexpr Point max_rate = { 0.8,0.8 };
 
 		cv::Mat hsv;
 		cv::cvtColor(source, hsv, cv::COLOR_BGR2HSV);
@@ -613,35 +622,52 @@ public:
 		std::vector<cv::Vec4i> hierarchy;
 		cv::findContours(filter, CardContours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
+		/*cv::imshow("", filter);
+		cv::waitKey();*/
+
+		/*for (size_t i = 0; i < CardContours.size(); i++)
+		{
+			cv::drawContours(source, CardContours, i, { 0xFF,0x00,0x00 }, 2);
+		}
+		cv::imshow("", source);
+		cv::waitKey();*/
+
 		std::vector<Rect> bounds;
 		for (const auto& CardContour : CardContours) {
 			auto bound = ngs_cv::Convert(cv::boundingRect(CardContour));
-			if (!ngs::In(bound.width, IMAGE_SIZE.x * min_rate.x, IMAGE_SIZE.x * max_rate.x))continue;
-			if (!ngs::In(bound.height, IMAGE_SIZE.y * min_rate.y, IMAGE_SIZE.y * max_rate.y))continue;
-			cv::rectangle(source, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
-			if (!ngs::In<float>(bound.WH_Ratio(), 0.1, 10))continue;
 
 			double CardArea = cv::contourArea(CardContour);
-			if (!ngs::In(bound.Area() / CardArea, 0.8, 1.2))continue;
+			if (!ngs::In<float>(CardArea / bound.Area(), 0.3, 1.5))continue;
+
+			if (!ngs::In<float>(bound.width, filter.cols * min_rate.x, filter.cols * max_rate.x))continue;
+			if (!ngs::In<float>(bound.height, filter.rows * min_rate.y, filter.rows * max_rate.y))continue;
+			//cv::rectangle(source, ngs_cv::Convert(bound), { 0xFF,0x00,0x00 }, 2);
+			if (!ngs::In<float>(bound.WH_Ratio(), 0.3, 3.5))continue;
+
+			/*cv::imshow("", source);
+			cv::waitKey();*/
+
 			bounds.push_back(bound);
 		}
 		ngs::nos.Log("CVUtil::_RecognizeCardColor", "检测到卡片%d个\n", bounds.size());
 		std::ranges::sort(bounds, [](const Rect& a, const Rect& b) {
-			return a < b;
+			return a > b;
 			});
+
 		return bounds;
 	}
 
 	static Treasure::Form _RecognizePattern(
 		const cv::Mat& source,
-		const ColorRange& PatternRange,
-		const Rect& bound
+		const ColorRange& PatternRange
 	) {
-		constexpr Point min_rate = { 0.6,0.3 };
+		constexpr Point min_rate = { 0.25,0.25 };
 		constexpr Point max_rate = { 0.95,0.7 };
 
-		cv::Mat hsv;
-		source(ngs_cv::Convert(bound)).copyTo(hsv);
+		/*cv::imshow("", source);
+		cv::waitKey();*/
+
+		cv::Mat hsv = source;
 		cv::cvtColor(hsv, hsv, cv::COLOR_BGR2HSV);
 		Point image_size = { 200,200 };
 		cv::resize(hsv, hsv, {}, image_size.x / hsv.cols, image_size.y / hsv.cols);
@@ -652,8 +678,9 @@ public:
 		cv::morphologyEx(mask, filter, cv::MorphTypes::MORPH_OPEN, cv::getStructuringElement(cv::MorphShapes::MORPH_RECT, { 5,5 }), { -1,-1 }, 1);
 
 
-		cv::imshow("", filter);
-		cv::waitKey();
+		/*cv::imshow("", filter);
+		cv::waitKey();*/
+
 		std::vector<std::vector<cv::Point>> PatternContours;
 		std::vector<cv::Vec4i> hierarchy;
 		cv::findContours(filter, PatternContours, hierarchy, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
@@ -661,20 +688,21 @@ public:
 		std::vector<std::vector<cv::Point>> validContours;
 		std::vector<Rect> bounds;
 
-
 		for (size_t i = 0; i < PatternContours.size(); i++) {
 			const auto& PatternContour = PatternContours[i];
 			cv::drawContours(hsv, PatternContours, i, { 0x00,0xFF,0x00 }, 2);
-
+			cv::imshow("", hsv);
+			cv::waitKey();
 			auto bound = ngs_cv::Convert(cv::boundingRect(PatternContour));
 			if (!ngs::In(bound.width, image_size.x * min_rate.x, image_size.x * max_rate.x))continue;
 			if (!ngs::In(bound.height, image_size.y * min_rate.y, image_size.y * max_rate.y))continue;
+
 			//cv::rectangle(source, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
 			if (!ngs::In<float>(bound.WH_Ratio(), 0.5, 2))continue;
 			//cv::rectangle(hsv, ngs_cv::Convert(bound), { 0x00,0xFF,0x00 }, 2);
 
-			cv::imshow("", hsv);
-			cv::waitKey();
+			/*cv::imshow("", hsv);
+			cv::waitKey();*/
 			double PatternArea = cv::contourArea(PatternContour);
 			if (!ngs::In<float>(bound.Area() / PatternArea, 0.8 * 0.8, 1.5 * 1.5))continue;
 

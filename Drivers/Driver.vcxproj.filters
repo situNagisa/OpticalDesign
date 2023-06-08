@@ -22,6 +22,9 @@
     <Filter Include="源文件\ov5640">
       <UniqueIdentifier>{f825bf5f-535a-4895-934b-f9f41fc6df34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\jy901b">
+      <UniqueIdentifier>{f52df1d2-fa56-430f-8a04-b455805cd218}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ESP32\Register.h">
@@ -53,6 +56,9 @@
     <ClCompile Include="ESP32\esp32.c">
       <Filter>源文件\esp32</Filter>
     </ClCompile>
+    <ClCompile Include="JY901B\jy901b.c">
+      <Filter>源文件\jy901b</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="OV5640\Makefile">
@@ -63,6 +69,9 @@
     </None>
     <None Include="Makefile">
       <Filter>源文件</Filter>
+    </None>
+    <None Include="JY901B\Makefile">
+      <Filter>源文件\jy901b</Filter>
     </None>
   </ItemGroup>
 </Project>

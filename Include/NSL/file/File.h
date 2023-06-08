@@ -123,6 +123,10 @@ public:
 
 	ngs::void_ptr MemoryMap(size_t length, int port, int flag, std::ptrdiff_t offset = 0) { return MemoryMap(nullptr, length, port, flag, offset); }
 	ngs::void_ptr MemoryMap(ngs::void_ptr address, size_t length, int port, int flag, std::ptrdiff_t offset = 0);
+
+	template<typename T>
+	static bool MemoryUnMap(T* address) { return MemoryUnMap(address, sizeof(T)); }
+	static bool MemoryUnMap(ngs::void_ptr address, size_t size);
 private:
 
 private:

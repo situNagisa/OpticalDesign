@@ -22,7 +22,7 @@ constexpr float CAR_DENSITY = CAR_MASS / CAR_AREA;
 #if NGS_PLATFORM == NGS_WINDOWS
 constexpr auto TEST_PICTURE = R"(C:\Users\86198\Pictures\test8.jpg)";
 #elif NGS_PLATFORM == NGS_LINUX
-constexpr auto TEST_PICTURE = "/mnt/test8.jpg";
+constexpr auto TEST_PICTURE = "/home/nagisa/pic/test8.jpg";
 #endif
 
 constexpr float FOOT_ROTATE_ANGLE_THRESHOLD = 0.1f;
@@ -33,12 +33,6 @@ inline constexpr bool DEBUG_EYES = false;
 
 constexpr ngs::Vector2D<size_t> IMAGE_SIZE{ 350, 350 };
 
-enum class Team {
-	RED,
-	BLUE
-};
-inline auto TEAM = Team::RED;
-
 struct Treasure {
 	ngs::HSV card;
 	ngs::HSV pattern;
@@ -48,6 +42,7 @@ struct Treasure {
 		triangle,
 	} form;
 };
+Treasure NULL_TREASURE = { {},{},Treasure::Form::unknown };
 
 struct ColorRange {
 	std::array<int, 3>
@@ -78,12 +73,46 @@ struct ColorRange {
 
 namespace color_defined {
 	constexpr ColorRange
-		red = { {145,0x25,0x20},{210,0xFF,0xFF} },
+		red = { {145,0x25,0x50},{210,0xFF,0xFF} },
 		green = { {37,0x20,0x20},{80,0xFF,0xFF} },
-		blue = { {85,0x18,0x30},{125,0xFF,0xFF} },
-		yellow = { {8,0x20,0x20},{35,0xFF,0xFF} }
+		blue = { {85,0x40,0x50},{125,0xFF,0xFF} },
+		yellow = { {8,0x20,0x50},{35,0xFF,0xFF} }
 	;
 }
+
+enum class Team {
+	RED,
+	BLUE
+};
+
+std::pair<ColorRange, ColorRange> GetTeamColorRange(Team team) {
+	switch (team)
+	{
+	case optical_design::Team::RED:
+		return { color_defined::red,color_defined::green };
+		break;
+	case optical_design::Team::BLUE:
+		return { color_defined::blue,color_defined::yellow };
+		break;
+	default:
+		break;
+	}
+}
+Team GetTeamTarget(Team team) {
+	switch (team)
+	{
+	case optical_design::Team::RED:
+		return Team::BLUE;
+		break;
+	case optical_design::Team::BLUE:
+		return Team::RED;
+		break;
+	default:
+		break;
+	}
+}
+
+using GrayData = std::array<bool, 8>;
 
 OPT_END
 

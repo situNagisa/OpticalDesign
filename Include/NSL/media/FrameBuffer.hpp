@@ -32,6 +32,7 @@ bool FrameBuffer::Open(const ngs::FilePath& path) {
 		ngs::nos.Error("memory map fail!\n");
 		goto err_opened;
 	}
+	ngs::nos.Log("FrameBuffer::Open", "successfully!\n");
 
 	return true;
 
@@ -47,6 +48,7 @@ err_new:;
 inline void FrameBuffer::Close() {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
+	_file.MemoryUnMap(_screen, GetSize());
 	_file.Close();
 	ngs::Delete(&data);
 	_data = nullptr;

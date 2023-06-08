@@ -38,7 +38,7 @@ namespace devices {
 		auto& data = *(_CameraData*)_data;
 		return data.capture.isOpened();
 	}
-	inline const std::vector<ngs::byte>& Camera::Get() {
+	inline std::vector<ngs::byte> Camera::Get() {
 		auto& data = *(_CameraData*)_data;
 		cv::Mat buffer;
 

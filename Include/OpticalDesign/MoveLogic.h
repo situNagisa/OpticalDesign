@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#pragma once
-
 #include "NGS/NGS.h"
 #include "OpticalDesign/Config.h"
 #include "OpticalDesign/Setting.h"
@@ -36,21 +34,21 @@ public:
 		ngs::nos.Log("MoveLogic::Initialize", "运动逻辑初始化成功\n");
 	}
 	void Update(const Point& actualPos) {
-		if (!_maze->At(GetDst()).IsTreasure() && !_maze->At(GetDst()).IsEnd()) {
-			//维护路线图，减去不必要的枝
-			ngs::nos.Log("MoveLogic::Update", "目标点:(%d,%d)[%d] 不是宝藏，重新进行路径规划\n", GetDst().x, GetDst().y, _maze->At(GetDst()).data);
-			auto needRemoved = _pathMap.GetNodeByPos(GetDst());
-			if (needRemoved)_pathMap.RemoveNode(needRemoved);
-			needRemoved = _pathMap.GetNodeByPos(*_curInflectionPos);
-			if (needRemoved)_pathMap.RemoveNode(needRemoved);
-			_pathMap.Update();
-			//路径规划
-			//if (_pathMap.GetNodeByPos(_curLogicPos)->GetGrid()->IsTreasure())
-				//_maze->Set(_curLogicPos, MazeGrid::road);
-			_PathPlanning(actualPos);
-			ngs::Assert(_IsOnPlanedRoute());
-			return;
-		}
+		//if (!_maze->At(GetDst()).IsTreasure() && !_maze->At(GetDst()).IsEnd()) {
+		//	//维护路线图，减去不必要的枝
+		//	ngs::nos.Log("MoveLogic::Update", "目标点:(%d,%d)[%d] 不是宝藏，重新进行路径规划\n", GetDst().x, GetDst().y, _maze->At(GetDst()).data);
+		//	auto needRemoved = _pathMap.GetNodeByPos(GetDst());
+		//	if (needRemoved)_pathMap.RemoveNode(needRemoved);
+		//	needRemoved = _pathMap.GetNodeByPos(*_curInflectionPos);
+		//	if (needRemoved)_pathMap.RemoveNode(needRemoved);
+		//	_pathMap.Update();
+		//	//路径规划
+		//	//if (_pathMap.GetNodeByPos(_curLogicPos)->GetGrid()->IsTreasure())
+		//		//_maze->Set(_curLogicPos, MazeGrid::road);
+		//	_PathPlanning(actualPos);
+		//	ngs::Assert(_IsOnPlanedRoute());
+		//	return;
+		//}
 		//若未在积极拐点
 		if (!IsArrivedDst()) {
 			//若没有移动
@@ -60,13 +58,13 @@ public:
 				//设置消极拐点
 				auto it = _GetInflectionPoint(actualPos);
 				//如果实际位置处于拐点上
+				_curLogicPos = actualPos;
 				if (it != _curRoute->points.end()) {
 					_curInflectionPos = it;
 					ngs::nos.Log("MoveLogic::Update", "当前逻辑点：(%d,%d),当前拐点:(%d,%d)", (int)_curLogicPos.x, (int)_curLogicPos.y, (int)_curInflectionPos->x, (int)_curInflectionPos->y);
 					if (_curInflectionPos != _curRoute->points.end() - 1)ngs::nos.Trace("当前积极拐点:(%d,%d)", (int)GetNextPos().x, (int)GetNextPos().y);
 					ngs::nos.Trace("\n");
 				}
-				_curLogicPos = actualPos;
 				return;
 			}
 			ngs::nos.Log("MoveLogic::Update", "已偏离航线，正在重新进行路径规划...\n");
@@ -128,7 +126,7 @@ public:
 	 */
 	Point GetLogicPos()const { return _curLogicPos; }
 	/**
-	 * \brief 获取当前的消极拐点
+	 * \brief 获取当前的积极拐点
 	 * \return
 	 */
 	Point GetNextPos()const {
@@ -136,7 +134,7 @@ public:
 		return *(_curInflectionPos + 1);
 	}
 	/**
-	 * \brief 获取当前的积极拐点
+	 * \brief 获取当前的消极拐点
 	 *
 	 * \return
 	 */
@@ -236,7 +234,7 @@ private:
 		return std::find(_curRoute->points.begin(), _curRoute->points.end(), pos);
 	}
 
-private:
+public:
 	Maze* _maze;
 
 	PathMap _pathMap = {};

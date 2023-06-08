@@ -26,6 +26,9 @@ public:
 		if (devices::g_camera->IsOpened()) {
 			devices::g_camera->Close();
 		}
+		if (devices::g_screen->IsOpened()) {
+			devices::g_screen->Close();
+		}
 		if (_curMaze) {
 			ngs::Delete(_curMaze);
 			_curMaze = nullptr;
@@ -35,10 +38,14 @@ public:
 		if (!devices::g_camera->IsOpened() && !devices::g_camera->Open()) {
 			return false;
 		}
+		if (!devices::g_screen->IsOpened() && !devices::g_screen->Open()) {
+			return false;
+		}
 		return true;
 	}
 	void Update() {
 		devices::g_camera->Update();
+		devices::g_screen->Update();
 		switch (_mode)
 		{
 		case Mode::ready:
@@ -62,7 +69,7 @@ public:
 	const Maze* GetMaze() const { return _curMaze; }
 
 	bool HasSeenTreasure()const { return _hasSeenTreasure; }
-	bool IsSelfTreasure()const { return false; }
+	bool IsSelfTreasure()const { return _isSelfTreasure; }
 
 	void SetMode(Mode mode) { _mode = mode; }
 private:
@@ -74,22 +81,42 @@ private:
 		_ConvertImageToMaze();
 	}
 	void _UpdateRuntime() {
-		_hasSeenTreasure = _RecognizeTreasure();
+		auto treasure = _RecognizeTreasure();
+		_hasSeenTreasure = treasure.form != Treasure::Form::unknown;
+		//isSelfTreasure	 = treasure.
 	}
-	bool _RecognizeTreasure() {
+	Treasure _RecognizeTreasure() {
 		auto view = _GetView();
-		//return CVUtil::RecognizeTreasure(view);
-		return false;
+		if (view.empty())return NULL_TREASURE;
+		auto self = GetTeamColorRange(team);
+		auto treasure = CVUtil::RecognizeTreasure(view, self.first, self.second);
+		if (treasure.form == Treasure::Form::unknown) {
+			auto target = GetTeamColorRange(GetTeamTarget(team));
+			treasure = CVUtil::RecognizeTreasure(view, target.first, target.second);
+			if (treasure.form == Treasure::Form::unknown)return NULL_TREASURE;
+		}
+		return treasure;
 	}
 	bool _RecognizeMaze() {
-		cv::Mat temp = CVUtil::RecognizeMaze<IMAGE_SIZE.x, IMAGE_SIZE.y>(_GetView());
+		auto view = _GetView();
+		if (view.empty()) {
+			ngs::nos.Warning("get view is empty!\n");
+			return false;
+		}
+		devices::g_screen->Show(view);
+		devices::g_screen->Update();
+		cv::Mat temp = CVUtil::RecognizeMaze<IMAGE_SIZE.x, IMAGE_SIZE.y>(view);
 		if (temp.empty()) {
 			return false;
 		}
 		ngs::nos.Log("Eyes::_RecognizeMaze", "识别到迷宫\n");
+		devices::g_screen->Show({});
 		_curImage = temp;
 		return true;
 	}
+public:
+	Point start, end;
+private:
 	bool _ConvertImageToMaze() {
 		ngs::nos.Log("Eyes::_ConvertImageToMaze", "开始转换图像为迷宫...\n");
 
@@ -105,7 +132,7 @@ private:
 		}
 
 		std::vector<Point> treasures;
-		Point start, end;
+
 		{
 			Rect frame;
 			double stepX, stepY;
@@ -167,19 +194,33 @@ private:
 					, (int)frame.x, (int)frame.y, (int)frame.width, (int)frame.height, (int)stepX, (int)stepY);
 
 
-				if (TEAM == Team::RED) {
+				if (team == Team::RED) {
 					start = CVUtil::ToMaze(red_start.Center(), frame);
 					end = CVUtil::ToMaze(blue_start.Center(), frame);
 				}
-				else if (TEAM == Team::BLUE) {
+				else if (team == Team::BLUE) {
 					start = CVUtil::ToMaze(blue_start.Center(), frame);
 					end = CVUtil::ToMaze(red_start.Center(), frame);
 				}
+				if (Maze::IsInMaze(start) && Maze::IsInMaze(end)) {
+					ngs::nos.Warning("颜色范围过大,红色蓝色都找错了!\n");
+					ngs::Delete(_curMaze);
+					_curMaze = nullptr;
+					return false;
+				}
+				if (Maze::IsInMaze(start) && !Maze::IsInMaze(end)) {
+					ngs::nos.Warning("起点找错了，正在进行修正...\n");
+					start = Maze::GetSymmetry(end);
+				}
+				if (!Maze::IsInMaze(end) && Maze::IsInMaze(end)) {
+					ngs::nos.Warning("终点找错了，正在进行修正...\n");
+					end = Maze::GetSymmetry(start);
+				}
 
-				start.x = ngs::Clamp<int>(start.x, 0, 2 * MAZE_SIZE.x);
+				/*start.x = ngs::Clamp<int>(start.x, 0, 2 * MAZE_SIZE.x);
 				start.y = ngs::Clamp<int>(start.y, 0, 2 * MAZE_SIZE.y);
 				end.x = ngs::Clamp<int>(end.x, 0, 2 * MAZE_SIZE.x);
-				end.y = ngs::Clamp<int>(end.y, 0, 2 * MAZE_SIZE.y);
+				end.y = ngs::Clamp<int>(end.y, 0, 2 * MAZE_SIZE.y);*/
 
 				ngs::nos.Log("Eyes::_ConvertImageToMaze", "起点：(%d,%d) 终点：(%d,%d)\n", (int)start.x, (int)start.y, (int)end.x, (int)end.y);
 				ngs::nos.Log("Eyes::_ConvertImageToMaze", "开始寻找宝藏区域...\n");
@@ -328,8 +369,8 @@ private:
 			}
 		}
 		ngs::nos.Log("Eyes::_ConvertImageToMaze", "开始将宝藏写入迷宫...\n");
-		maze.Set(start.x, start.y, MazeGrid::start);
-		maze.Set(end.x, end.y, MazeGrid::end);
+		maze.Set(ngs::Clamp<int>(start.x, 0, 2 * MAZE_SIZE.x), ngs::Clamp<int>(start.y, 0, 2 * MAZE_SIZE.y), MazeGrid::start);
+		maze.Set(ngs::Clamp<int>(end.x, 0, 2 * MAZE_SIZE.x), ngs::Clamp<int>(end.y, 0, 2 * MAZE_SIZE.y), MazeGrid::end);
 		for (auto& i : treasures) {
 			maze.Set(i, MazeGrid::treasure_unknown);
 		}
@@ -343,16 +384,14 @@ private:
 		//如果有摄像头设备可以注释掉这个return
 		//return cv::imread(TEST_PICTURE);
 
-		if (!devices::g_camera->IsOpened() && !devices::g_camera->Open())
-			return {};
-
 		std::vector<ngs::byte> data = devices::g_camera->Get();
 		if (data.empty())return {};
 		cv::Mat image = cv::imdecode(data, cv::ImreadModes::IMREAD_COLOR);
 		return image;
 	}
+public:
+	Team team = Team::RED;
 private:
-
 	/**
 	 * @brief 当前图像，保证长宽相等
 	 */
@@ -361,7 +400,7 @@ private:
 
 	Mode _mode = Mode::ready;
 
-	bool _hasSeenTreasure = false;
+	bool _hasSeenTreasure = false, _isSelfTreasure = false;
 };
 
 

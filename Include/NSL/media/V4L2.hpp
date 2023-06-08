@@ -87,6 +87,10 @@ inline void V4L2::Close()
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
+	for (auto& cache : data.buffers) {
+		data.device.MemoryUnMap(cache.first, cache.second);
+	}
+
 	v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	if (!data.device.IOCtrl(VIDIOC_STREAMOFF, &type)) {
 		ngs::nos.Error("close buffer stream fail!\n");
